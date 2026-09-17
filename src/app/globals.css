@@ -112,10 +112,15 @@ body {
   color: #fff;
 }
 
-*:focus-visible {
-  outline: 3px solid var(--color-gilly);
-  outline-offset: 3px;
-  border-radius: 4px;
+@layer base {
+  /* na camada base para que qualquer utilitário (outline-none, focus:ring...)
+     de um componente específico sempre vença este reset genérico.
+     Sem border-radius aqui: isso sobrescreveria a forma do próprio elemento
+     (ex.: um botão em pílula "quadrava" no instante em que recebia foco). */
+  *:focus-visible {
+    outline: 3px solid var(--color-gilly);
+    outline-offset: 3px;
+  }
 }
 
 /* ---------- keyframes ---------- */
