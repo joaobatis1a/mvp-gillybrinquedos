@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
+import { CheckoutProvider } from "@/lib/checkout-context";
 
 const baloo = Baloo_2({
   variable: "--font-baloo",
@@ -30,9 +31,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-cream text-ink">
         <AuthProvider>
           <CartProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <CheckoutProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </CheckoutProvider>
           </CartProvider>
         </AuthProvider>
       </body>
