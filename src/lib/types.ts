@@ -1,23 +1,30 @@
+import type { ToyArtKey } from "@/components/toys/toy-art";
+
 export type CategorySlug =
   | "bonecas"
+  | "bonecos"
   | "carrinhos"
-  | "cozinha"
-  | "blocos"
+  | "montar"
   | "pelucias"
-  | "eletronicos"
-  | "colecionaveis"
-  | "bebes";
+  | "jogos"
+  | "criativos"
+  | "bebes"
+  | "radicais"
+  | "eletronicos";
 
-export type CategoryAccent = "gilly" | "sky" | "candy" | "sun";
+export type CategoryAccent = "gilly" | "sky" | "candy" | "sun" | "mint" | "grape";
 
 export type Category = {
   slug: CategorySlug;
   name: string;
   shortName: string;
-  emoji: string;
+  art: ToyArtKey;
   accent: CategoryAccent;
   description: string;
+  blurb: string;
 };
+
+export type ProductTag = "novidade" | "mais-vendido" | "ultimas-unidades" | "exclusivo";
 
 export type Product = {
   id: string;
@@ -25,17 +32,19 @@ export type Product = {
   name: string;
   brand: string;
   categorySlug: CategorySlug;
-  emoji: string;
+  art: ToyArtKey;
   price: number;
   originalPrice?: number;
   installmentsMax: number;
   rating: number;
   reviewsCount: number;
   stock: number;
-  ageRange: string;
+  /** Idade mínima recomendada, em anos (0 = primeiros meses) */
+  ageMin: number;
+  ageLabel: string;
   description: string;
   highlights: string[];
-  tags?: Array<"novidade" | "mais-vendido" | "ultimas-unidades">;
+  tags?: ProductTag[];
 };
 
 export type Address = {
@@ -86,4 +95,14 @@ export type StoredUser = {
   email: string;
   phone: string;
   password: string;
+};
+
+export type SortOption = "relevancia" | "menor-preco" | "maior-preco" | "avaliacao" | "novidades";
+
+export type ProductFilters = {
+  brands: string[];
+  ages: string[];
+  maxPrice: number | null;
+  onlyPromo: boolean;
+  sort: SortOption;
 };
