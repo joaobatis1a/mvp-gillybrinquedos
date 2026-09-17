@@ -1,14 +1,8 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, type ReactNode } from "react";
 import type { Address, Order, StoredUser } from "@/lib/types";
+import { usePersistentState, useIsClient } from "@/lib/persistent-state";
 
 const STORAGE_KEY = "gilly:auth";
 
@@ -37,7 +31,7 @@ type AuthContextValue = {
   addOrder: (order: Order) => void;
 };
 
-const emptyState: AuthState = {
+const initialState: AuthState = {
   users: [],
   currentEmail: null,
   addressesByEmail: {},
@@ -47,139 +41,143 @@ const emptyState: AuthState = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AuthState>(emptyState);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [state, setState] = usePersistentState<AuthState>(STORAGE_KEY, initialState);
+  const isHydrated = useIsClient();
 
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) setState({ ...emptyState, ...JSON.parse(raw) });
-    } catch {
-      // ignore corrupted storage
-    } finally {
-      setIsHydrated(true);
-    }
-  }, []);
+  const register = useCallback(
+    (data: RegisterInput) => {
+      const email = data.email.trim().toLowerCase();
+      let result = { success: true, message: "Cadastro realizado com sucesso!" };
+      setState((prev) => {
+        if (prev.users.some((u) => u.email === email)) {
+          result = { success: false, message: "Já existe uma conta com este e-mail." };
+          return prev;
+        }
+        return {
+          ...prev,
+          users: [...prev.users, { ...data, email }],
+          currentEmail: email,
+        };
+      });
+      return result;
+    },
+    [setState]
+  );
 
-  useEffect(() => {
-    if (!isHydrated) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [state, isHydrated]);
-
-  const register = useCallback((data: RegisterInput) => {
-    const email = data.email.trim().toLowerCase();
-    let result = { success: true, message: "Cadastro realizado com sucesso!" };
-    setState((prev) => {
-      if (prev.users.some((u) => u.email === email)) {
-        result = { success: false, message: "Já existe uma conta com este e-mail." };
-        return prev;
-      }
-      return {
-        ...prev,
-        users: [...prev.users, { ...data, email }],
-        currentEmail: email,
-      };
-    });
-    return result;
-  }, []);
-
-  const login = useCallback((email: string, password: string) => {
-    const normalized = email.trim().toLowerCase();
-    let result = { success: false, message: "E-mail ou senha incorretos." };
-    setState((prev) => {
-      const found = prev.users.find(
-        (u) => u.email === normalized && u.password === password
-      );
-      if (!found) return prev;
-      result = { success: true, message: "Login realizado com sucesso!" };
-      return { ...prev, currentEmail: found.email };
-    });
-    return result;
-  }, []);
+  const login = useCallback(
+    (email: string, password: string) => {
+      const normalized = email.trim().toLowerCase();
+      let result = { success: false, message: "E-mail ou senha incorretos." };
+      setState((prev) => {
+        const found = prev.users.find(
+          (u) => u.email === normalized && u.password === password
+        );
+        if (!found) return prev;
+        result = { success: true, message: "Login realizado com sucesso!" };
+        return { ...prev, currentEmail: found.email };
+      });
+      return result;
+    },
+    [setState]
+  );
 
   const logout = useCallback(() => {
     setState((prev) => ({ ...prev, currentEmail: null }));
-  }, []);
+  }, [setState]);
 
-  const updateProfile = useCallback((data: Partial<Pick<StoredUser, "name" | "phone">>) => {
-    setState((prev) => ({
-      ...prev,
-      users: prev.users.map((u) =>
-        u.email === prev.currentEmail ? { ...u, ...data } : u
-      ),
-    }));
-  }, []);
-
-  const resetPassword = useCallback((email: string) => {
-    const normalized = email.trim().toLowerCase();
-    const exists = state.users.some((u) => u.email === normalized);
-    return exists
-      ? { success: true, message: "Enviamos um link de redefinição para o seu e-mail." }
-      : { success: false, message: "Não encontramos uma conta com este e-mail." };
-  }, [state.users]);
-
-  const addAddress = useCallback((address: Omit<Address, "id">) => {
-    const newAddress: Address = { ...address, id: crypto.randomUUID() };
-    setState((prev) => {
-      if (!prev.currentEmail) return prev;
-      const current = prev.addressesByEmail[prev.currentEmail] ?? [];
-      return {
+  const updateProfile = useCallback(
+    (data: Partial<Pick<StoredUser, "name" | "phone">>) => {
+      setState((prev) => ({
         ...prev,
-        addressesByEmail: {
-          ...prev.addressesByEmail,
-          [prev.currentEmail]: [...current, newAddress],
-        },
-      };
-    });
-    return newAddress;
-  }, []);
+        users: prev.users.map((u) => (u.email === prev.currentEmail ? { ...u, ...data } : u)),
+      }));
+    },
+    [setState]
+  );
 
-  const updateAddress = useCallback((address: Address) => {
-    setState((prev) => {
-      if (!prev.currentEmail) return prev;
-      const current = prev.addressesByEmail[prev.currentEmail] ?? [];
-      return {
-        ...prev,
-        addressesByEmail: {
-          ...prev.addressesByEmail,
-          [prev.currentEmail]: current.map((a) => (a.id === address.id ? address : a)),
-        },
-      };
-    });
-  }, []);
+  const resetPassword = useCallback(
+    (email: string) => {
+      const normalized = email.trim().toLowerCase();
+      const exists = state.users.some((u) => u.email === normalized);
+      return exists
+        ? { success: true, message: "Enviamos um link de redefinição para o seu e-mail." }
+        : { success: false, message: "Não encontramos uma conta com este e-mail." };
+    },
+    [state.users]
+  );
 
-  const removeAddress = useCallback((id: string) => {
-    setState((prev) => {
-      if (!prev.currentEmail) return prev;
-      const current = prev.addressesByEmail[prev.currentEmail] ?? [];
-      return {
-        ...prev,
-        addressesByEmail: {
-          ...prev.addressesByEmail,
-          [prev.currentEmail]: current.filter((a) => a.id !== id),
-        },
-      };
-    });
-  }, []);
+  const addAddress = useCallback(
+    (address: Omit<Address, "id">) => {
+      const newAddress: Address = { ...address, id: crypto.randomUUID() };
+      setState((prev) => {
+        if (!prev.currentEmail) return prev;
+        const current = prev.addressesByEmail[prev.currentEmail] ?? [];
+        return {
+          ...prev,
+          addressesByEmail: {
+            ...prev.addressesByEmail,
+            [prev.currentEmail]: [...current, newAddress],
+          },
+        };
+      });
+      return newAddress;
+    },
+    [setState]
+  );
 
-  const addOrder = useCallback((order: Order) => {
-    setState((prev) => {
-      if (!prev.currentEmail) return prev;
-      const current = prev.ordersByEmail[prev.currentEmail] ?? [];
-      return {
-        ...prev,
-        ordersByEmail: {
-          ...prev.ordersByEmail,
-          [prev.currentEmail]: [order, ...current],
-        },
-      };
-    });
-  }, []);
+  const updateAddress = useCallback(
+    (address: Address) => {
+      setState((prev) => {
+        if (!prev.currentEmail) return prev;
+        const current = prev.addressesByEmail[prev.currentEmail] ?? [];
+        return {
+          ...prev,
+          addressesByEmail: {
+            ...prev.addressesByEmail,
+            [prev.currentEmail]: current.map((a) => (a.id === address.id ? address : a)),
+          },
+        };
+      });
+    },
+    [setState]
+  );
+
+  const removeAddress = useCallback(
+    (id: string) => {
+      setState((prev) => {
+        if (!prev.currentEmail) return prev;
+        const current = prev.addressesByEmail[prev.currentEmail] ?? [];
+        return {
+          ...prev,
+          addressesByEmail: {
+            ...prev.addressesByEmail,
+            [prev.currentEmail]: current.filter((a) => a.id !== id),
+          },
+        };
+      });
+    },
+    [setState]
+  );
+
+  const addOrder = useCallback(
+    (order: Order) => {
+      setState((prev) => {
+        if (!prev.currentEmail) return prev;
+        const current = prev.ordersByEmail[prev.currentEmail] ?? [];
+        return {
+          ...prev,
+          ordersByEmail: {
+            ...prev.ordersByEmail,
+            [prev.currentEmail]: [order, ...current],
+          },
+        };
+      });
+    },
+    [setState]
+  );
 
   const user = state.users.find((u) => u.email === state.currentEmail) ?? null;
-  const addresses = state.currentEmail
-    ? state.addressesByEmail[state.currentEmail] ?? []
-    : [];
+  const addresses = state.currentEmail ? state.addressesByEmail[state.currentEmail] ?? [] : [];
   const orders = state.currentEmail ? state.ordersByEmail[state.currentEmail] ?? [] : [];
 
   const value: AuthContextValue = {

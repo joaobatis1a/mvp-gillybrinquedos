@@ -1,17 +1,10 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
 import type { CartItem, Product } from "@/lib/types";
 import { getProductById } from "@/lib/data/products";
 import { findCoupon } from "@/lib/coupons";
+import { usePersistentState, useIsClient } from "@/lib/persistent-state";
 
 const STORAGE_KEY = "gilly:cart";
 
@@ -19,6 +12,8 @@ type CartState = {
   items: CartItem[];
   couponCode: string | null;
 };
+
+const initialState: CartState = { items: [], couponCode: null };
 
 type CartContextValue = {
   items: CartItem[];
@@ -41,77 +36,73 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<CartState>({ items: [], couponCode: null });
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [state, setState] = usePersistentState<CartState>(STORAGE_KEY, initialState);
+  const isHydrated = useIsClient();
 
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) setState(JSON.parse(raw));
-    } catch {
-      // ignore corrupted storage
-    } finally {
-      setIsHydrated(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isHydrated) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [state, isHydrated]);
-
-  const addItem = useCallback((productId: string, quantity = 1) => {
-    setState((prev) => {
-      const existing = prev.items.find((item) => item.productId === productId);
-      if (existing) {
-        return {
-          ...prev,
-          items: prev.items.map((item) =>
-            item.productId === productId
-              ? { ...item, quantity: item.quantity + quantity }
-              : item
-          ),
-        };
-      }
-      return { ...prev, items: [...prev.items, { productId, quantity }] };
-    });
-  }, []);
-
-  const removeItem = useCallback((productId: string) => {
-    setState((prev) => ({
-      ...prev,
-      items: prev.items.filter((item) => item.productId !== productId),
-    }));
-  }, []);
-
-  const updateQuantity = useCallback((productId: string, quantity: number) => {
-    setState((prev) => ({
-      ...prev,
-      items:
-        quantity <= 0
-          ? prev.items.filter((item) => item.productId !== productId)
-          : prev.items.map((item) =>
-              item.productId === productId ? { ...item, quantity } : item
+  const addItem = useCallback(
+    (productId: string, quantity = 1) => {
+      setState((prev) => {
+        const existing = prev.items.find((item) => item.productId === productId);
+        if (existing) {
+          return {
+            ...prev,
+            items: prev.items.map((item) =>
+              item.productId === productId
+                ? { ...item, quantity: item.quantity + quantity }
+                : item
             ),
-    }));
-  }, []);
+          };
+        }
+        return { ...prev, items: [...prev.items, { productId, quantity }] };
+      });
+    },
+    [setState]
+  );
+
+  const removeItem = useCallback(
+    (productId: string) => {
+      setState((prev) => ({
+        ...prev,
+        items: prev.items.filter((item) => item.productId !== productId),
+      }));
+    },
+    [setState]
+  );
+
+  const updateQuantity = useCallback(
+    (productId: string, quantity: number) => {
+      setState((prev) => ({
+        ...prev,
+        items:
+          quantity <= 0
+            ? prev.items.filter((item) => item.productId !== productId)
+            : prev.items.map((item) =>
+                item.productId === productId ? { ...item, quantity } : item
+              ),
+      }));
+    },
+    [setState]
+  );
 
   const clear = useCallback(() => {
     setState({ items: [], couponCode: null });
-  }, []);
+  }, [setState]);
 
-  const applyCoupon = useCallback((code: string) => {
-    const coupon = findCoupon(code);
-    if (!coupon) {
-      return { success: false, message: "Cupom inválido ou expirado." };
-    }
-    setState((prev) => ({ ...prev, couponCode: coupon.code }));
-    return { success: true, message: coupon.description };
-  }, []);
+  const applyCoupon = useCallback(
+    (code: string) => {
+      const coupon = findCoupon(code);
+      if (!coupon) {
+        return { success: false, message: "Cupom inválido ou expirado." };
+      }
+      setState((prev) => ({ ...prev, couponCode: coupon.code }));
+      return { success: true, message: coupon.description };
+    },
+    [setState]
+  );
 
   const removeCoupon = useCallback(() => {
     setState((prev) => ({ ...prev, couponCode: null }));
-  }, []);
+  }, [setState]);
 
   const lines = useMemo(
     () =>
