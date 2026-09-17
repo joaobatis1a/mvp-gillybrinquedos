@@ -101,7 +101,22 @@ export function FilteredProducts({ products }: { products: Product[] }) {
       </FilterBlock>
 
       <FilterBlock title="Preço até">
-        <p className="font-display text-xl font-extrabold text-gilly">{formatBRL(maxPrice)}</p>
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-bold text-ink-soft">R$</span>
+          <input
+            type="number"
+            min={50}
+            max={ceiling}
+            step={10}
+            value={maxPrice}
+            onChange={(event) => {
+              const raw = Number(event.target.value);
+              if (!Number.isNaN(raw)) setMaxPrice(Math.min(Math.max(raw, 0), ceiling));
+            }}
+            aria-label="Digitar preço máximo"
+            className="w-24 rounded-lg border-2 border-border bg-white px-2 py-1.5 text-sm font-bold text-ink outline-none focus:border-gilly"
+          />
+        </div>
         <input
           type="range"
           min={50}
@@ -109,8 +124,8 @@ export function FilteredProducts({ products }: { products: Product[] }) {
           step={10}
           value={maxPrice}
           onChange={(event) => setMaxPrice(Number(event.target.value))}
-          className="mt-2 w-full accent-[#F2600A]"
-          aria-label="Preço máximo"
+          className="mt-3 w-full accent-[#F2600A]"
+          aria-label="Preço máximo (arrastar)"
         />
         <div className="mt-1 flex justify-between text-[0.7rem] font-semibold text-ink-faint">
           <span>{formatBRL(50)}</span>
