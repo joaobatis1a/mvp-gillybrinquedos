@@ -3,11 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Product, ProductTag } from "@/lib/types";
-import { getCategoryBySlug } from "@/lib/data/categories";
-import { ProductArt } from "@/components/product/product-image";
+import { ProductPhoto } from "@/components/product/product-photo";
 import { PriceTag } from "@/components/product/price-tag";
 import { Rating } from "@/components/ui/rating";
-import { TiltCard } from "@/components/effects/tilt-card";
+import { FavoriteButton } from "@/components/product/favorite-button";
 import { CartIcon, CheckIcon, AgeIcon } from "@/components/icons";
 import { useCart } from "@/lib/cart-context";
 
@@ -19,7 +18,6 @@ const TAG_STYLE: Record<ProductTag, { label: string; className: string }> = {
 };
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
-  const category = getCategoryBySlug(product.categorySlug)!;
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
@@ -34,86 +32,90 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   }
 
   return (
-    <TiltCard strength={5}>
-      <article className="tilt-card glare group relative flex h-full flex-col overflow-hidden rounded-[1.8rem] border-2 border-border bg-white p-3 shadow-[0_2px_0_rgba(227,205,178,0.7)] transition-[box-shadow,border-color] duration-300 hover:border-gilly-light hover:shadow-[var(--shadow-lift)]">
-        <Link href={`/produto/${product.slug}`} className="tilt-layer block" tabIndex={-1}>
-          <ProductArt
-            art={product.art}
-            accent={category.accent}
-            className="aspect-square w-full"
-            artSize={priority ? 150 : 128}
-            seed={product.id}
-          />
-        </Link>
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-shadow duration-200 hover:shadow-[0_6px_20px_-8px_rgba(43,32,24,0.18)]">
+      <Link href={`/produto/${product.slug}`} className="relative block">
+        <ProductPhoto
+          src={product.images?.[0]}
+          alt={product.name}
+          art={product.art}
+          className="aspect-square w-full"
+          priority={priority}
+        />
 
         {/* selos */}
-        <div className="pointer-events-none absolute left-5 top-5 flex flex-col items-start gap-1.5">
+        <div className="pointer-events-none absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">
           {product.tags?.slice(0, 1).map((tag) => (
             <span
               key={tag}
-              className={`rounded-full px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-wide shadow-sm ${TAG_STYLE[tag].className}`}
+              className={`rounded-md px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wide shadow-sm ${TAG_STYLE[tag].className}`}
             >
               {TAG_STYLE[tag].label}
             </span>
           ))}
           {discount > 0 && (
-            <span className="rounded-full bg-ink px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-wide text-white shadow-sm">
+            <span className="rounded-md bg-danger px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wide text-white shadow-sm">
               -{discount}%
             </span>
           )}
         </div>
+      </Link>
 
-        {/* idade */}
-        <span className="pointer-events-none absolute right-5 top-5 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-[0.62rem] font-extrabold text-ink-soft shadow-sm backdrop-blur">
-          <AgeIcon size={12} />
-          {product.ageMin === 0 ? "0+" : `${product.ageMin}+`}
-        </span>
+      <FavoriteButton
+        productId={product.id}
+        className="absolute right-2.5 top-2.5 h-8 w-8 shadow-sm"
+      />
 
-        <div className="mt-3.5 flex flex-1 flex-col px-1.5">
-          <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-ink-faint">
+      <div className="flex flex-1 flex-col p-3.5">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.08em] text-ink-faint">
             {product.brand}
           </p>
-          <h3 className="mt-1 font-display text-[1.02rem] font-bold leading-tight text-ink">
-            <Link href={`/produto/${product.slug}`} className="link-draw">
-              {product.name}
-            </Link>
-          </h3>
-
-          <div className="mt-1.5">
-            <Rating value={product.rating} count={product.reviewsCount} />
-          </div>
-
-          <div className="mt-auto pt-3">
-            <PriceTag
-              price={product.price}
-              originalPrice={product.originalPrice}
-              installmentsMax={product.installmentsMax}
-            />
-          </div>
-
-          <button
-            onClick={handleAdd}
-            disabled={product.stock === 0}
-            className={`shine squish mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-extrabold transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50 ${
-              added
-                ? "bg-success text-white"
-                : "bg-gilly-light text-gilly-dark hover:bg-gilly hover:text-white"
-            }`}
-          >
-            {added ? (
-              <>
-                <CheckIcon size={17} />
-                Está no carrinho
-              </>
-            ) : (
-              <>
-                <CartIcon size={17} />
-                Adicionar
-              </>
-            )}
-          </button>
+          <span className="flex shrink-0 items-center gap-1 text-[0.65rem] font-bold text-ink-faint">
+            <AgeIcon size={12} />
+            {product.ageMin === 0 ? "0+" : `${product.ageMin}+`}
+          </span>
         </div>
-      </article>
-    </TiltCard>
+
+        <h3 className="mt-0.5 line-clamp-2 min-h-[2.6em] text-[0.92rem] font-semibold leading-tight text-ink">
+          <Link href={`/produto/${product.slug}`} className="hover:text-gilly-dark">
+            {product.name}
+          </Link>
+        </h3>
+
+        <div className="mt-1.5">
+          <Rating value={product.rating} count={product.reviewsCount} />
+        </div>
+
+        <div className="mt-auto pt-3">
+          <PriceTag
+            price={product.price}
+            originalPrice={product.originalPrice}
+            installmentsMax={product.installmentsMax}
+          />
+        </div>
+
+        <button
+          onClick={handleAdd}
+          disabled={product.stock === 0}
+          className={`squish mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-bold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
+            added
+              ? "bg-success text-white"
+              : "border-2 border-gilly text-gilly-dark hover:bg-gilly hover:text-white"
+          }`}
+        >
+          {added ? (
+            <>
+              <CheckIcon size={16} />
+              Adicionado
+            </>
+          ) : (
+            <>
+              <CartIcon size={16} />
+              Adicionar
+            </>
+          )}
+        </button>
+      </div>
+    </article>
   );
 }

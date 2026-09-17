@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductBySlug, getRelatedProducts, products } from "@/lib/data/products";
 import { getCategoryBySlug } from "@/lib/data/categories";
-import { ProductArt } from "@/components/product/product-image";
+import { ProductGallery } from "@/components/product/product-gallery";
 import { PriceTag } from "@/components/product/price-tag";
 import { Rating } from "@/components/ui/rating";
 import { AddToCartPanel } from "@/components/product/add-to-cart-panel";
+import { FavoriteButton } from "@/components/product/favorite-button";
 import { ProductSection } from "@/components/home/product-section";
 import { Reveal } from "@/components/effects/reveal";
 import {
@@ -64,18 +65,16 @@ export default async function ProductPage({ params }: Props) {
         {/* visual */}
         <Reveal variant="left">
           <div className="group relative">
-            <ProductArt
-              art={product.art}
-              accent={category.accent}
-              className="aspect-square w-full border-2 border-border"
-              artSize={260}
-              seed={product.id}
-            />
+            <ProductGallery images={product.images} art={product.art} name={product.name} />
             {discount > 0 && (
-              <span className="absolute left-5 top-5 rounded-full bg-ink px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wide text-white shadow-md">
+              <span className="absolute left-3 top-3 rounded-md bg-danger px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide text-white shadow-md">
                 {discount}% off
               </span>
             )}
+            <FavoriteButton
+              productId={product.id}
+              className="absolute right-3 top-3 h-10 w-10 shadow-md"
+            />
           </div>
 
           <div className="mt-4 grid grid-cols-3 gap-3">

@@ -4,21 +4,11 @@ import type { Metadata } from "next";
 import { getCategoryBySlug, categories } from "@/lib/data/categories";
 import { products } from "@/lib/data/products";
 import { FilteredProducts } from "@/components/filters/filtered-products";
-import { ToyArt } from "@/components/toys/toy-art";
+import { CategoryThumb } from "@/components/category/category-thumb";
 import { Reveal } from "@/components/effects/reveal";
 import { ChevronRightIcon } from "@/components/icons";
-import type { CategoryAccent } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
-
-const HERO_TONE: Record<CategoryAccent, string> = {
-  gilly: "from-gilly-light to-white",
-  sky: "from-sky-light to-white",
-  candy: "from-candy-light to-white",
-  sun: "from-sun-light to-white",
-  mint: "from-mint-light to-white",
-  grape: "from-grape-light to-white",
-};
 
 export function generateStaticParams() {
   return categories.map((category) => ({ slug: category.slug }));
@@ -55,19 +45,13 @@ export default async function CategoryPage({ params }: Props) {
       </nav>
 
       <Reveal>
-        <div
-          className={`relative mt-4 overflow-hidden rounded-[2rem] border-2 border-border bg-gradient-to-br p-7 sm:p-9 ${HERO_TONE[category.accent]}`}
-        >
-          <div className="relative flex flex-wrap items-center gap-5">
-            <span className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[1.6rem] bg-white shadow-[var(--shadow-soft)]">
-              <ToyArt art={category.art} size={62} className="animate-float" />
-            </span>
-            <div className="min-w-0">
-              <h1 className="font-display text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
-                {category.name}
-              </h1>
-              <p className="mt-2 max-w-xl text-ink-soft">{category.description}</p>
-            </div>
+        <div className="relative mt-4 flex flex-wrap items-center gap-5 rounded-xl border border-border bg-white p-7 sm:p-9">
+          <CategoryThumb category={category} size={88} />
+          <div className="min-w-0">
+            <h1 className="font-display text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
+              {category.name}
+            </h1>
+            <p className="mt-2 max-w-xl text-ink-soft">{category.description}</p>
           </div>
         </div>
       </Reveal>

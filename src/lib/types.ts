@@ -19,6 +19,8 @@ export type Category = {
   name: string;
   shortName: string;
   art: ToyArtKey;
+  /** foto real representativa da categoria (URL) — usada no lugar do ícone quando presente */
+  image?: string;
   accent: CategoryAccent;
   description: string;
   blurb: string;
@@ -33,6 +35,8 @@ export type Product = {
   brand: string;
   categorySlug: CategorySlug;
   art: ToyArtKey;
+  /** fotos reais do produto (URLs), em ordem de exibição na galeria. Vazio = usa a ilustração de fallback. */
+  images?: string[];
   price: number;
   originalPrice?: number;
   installmentsMax: number;

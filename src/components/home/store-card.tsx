@@ -6,10 +6,7 @@ export function StoreCard() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
       <Reveal variant="zoom">
-        <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-border bg-gradient-to-br from-white via-cream to-gilly-tint p-8 shadow-[var(--shadow-soft)] sm:p-12">
-          {/* decoração */}
-          <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-gilly/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-sky/10 blur-3xl" />
+        <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-border bg-cream-deep p-8 shadow-[var(--shadow-soft)] sm:p-12">
 
           <div className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
             <div>
@@ -77,7 +74,7 @@ export function StoreCard() {
             </div>
 
             <div className="relative flex justify-center">
-              <div className="absolute inset-8 animate-spin-slow rounded-[45%_55%_52%_48%/48%_45%_55%_52%] border-[3px] border-dashed border-gilly/25" />
+              <div className="absolute inset-10 rounded-full bg-white" />
               <GillyMascot mood="love" size={260} className="relative" />
             </div>
           </div>

@@ -7,6 +7,7 @@ import { SkyBackground } from "@/components/effects/sky-background";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
 import { CheckoutProvider } from "@/lib/checkout-context";
+import { FavoritesProvider } from "@/lib/favorites-context";
 
 const baloo = Baloo_2({
   variable: "--font-baloo",
@@ -35,13 +36,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col text-ink">
         <SkyBackground />
         <AuthProvider>
-          <CartProvider>
-            <CheckoutProvider>
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </CheckoutProvider>
-          </CartProvider>
+          <FavoritesProvider>
+            <CartProvider>
+              <CheckoutProvider>
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </CheckoutProvider>
+            </CartProvider>
+          </FavoritesProvider>
         </AuthProvider>
       </body>
     </html>

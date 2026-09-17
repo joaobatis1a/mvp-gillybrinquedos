@@ -23,9 +23,6 @@ export function PromoBanner() {
                 "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",
             }}
           />
-          <div className="pointer-events-none absolute -left-16 -top-20 h-64 w-64 rounded-full bg-white/15 blur-2xl" />
-          <div className="pointer-events-none absolute -bottom-24 -right-10 h-72 w-72 rounded-full bg-sun/25 blur-3xl" />
-
           {CORNER_TOYS.map((toy) => (
             <span
               key={toy.art}

@@ -129,9 +129,9 @@ export function Hero() {
           className="relative mx-auto aspect-square w-full max-w-[34rem]"
           style={{ ["--mx" as string]: "0", ["--my" as string]: "0" }}
         >
-          {/* blobs de fundo */}
-          <div className="absolute inset-[8%] rounded-[45%_55%_52%_48%/48%_45%_55%_52%] bg-gradient-to-br from-gilly-light via-sun-light to-sky-light opacity-80 blur-[2px]" />
-          <div className="absolute inset-[18%] animate-spin-slow rounded-[52%_48%_45%_55%/55%_52%_48%_45%] border-[3px] border-dashed border-white/80" />
+          {/* fundo neutro atrás da mascote — um único tom, sem degradê */}
+          <div className="absolute inset-[10%] rounded-full bg-gilly-tint" />
+          <div className="absolute inset-[19%] rounded-full border border-gilly-light" />
 
           {FLOATERS.map((floater) => (
             <span

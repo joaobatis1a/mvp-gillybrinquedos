@@ -2,25 +2,23 @@
 
 import Link from "next/link";
 import type { Product } from "@/lib/types";
-import { getCategoryBySlug } from "@/lib/data/categories";
-import { ProductArt } from "@/components/product/product-image";
+import { ProductPhoto } from "@/components/product/product-photo";
 import { formatBRL } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { PlusIcon, MinusIcon, TrashIcon } from "@/components/icons";
 
 export function CartItemRow({ product, quantity }: { product: Product; quantity: number }) {
   const { updateQuantity, removeItem } = useCart();
-  const category = getCategoryBySlug(product.categorySlug)!;
 
   return (
     <div className="group flex gap-4 border-b border-border py-5 last:border-none">
-      <Link href={`/produto/${product.slug}`} className="shrink-0">
-        <ProductArt
+      <Link href={`/produto/${product.slug}`} className="shrink-0 rounded-lg border border-border">
+        <ProductPhoto
+          src={product.images?.[0]}
+          alt={product.name}
           art={product.art}
-          accent={category.accent}
-          className="h-24 w-24"
-          artSize={64}
-          floating={false}
+          className="h-24 w-24 rounded-lg"
+          sizes="96px"
         />
       </Link>
 
