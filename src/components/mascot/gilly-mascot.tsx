@@ -1,39 +1,70 @@
 type GillyMood = "happy" | "wave" | "celebrate" | "search" | "sleepy" | "love";
 
-const CLOUD_FILL = "#FFFFFF";
-const CLOUD_STROKE = "#F2600A";
+const CLOUD_PATH =
+  "M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z";
 
-function Face({ mood }: { mood: GillyMood }) {
+const INK = "#2B2018";
+
+function Eyes({ mood }: { mood: GillyMood }) {
   if (mood === "sleepy") {
     return (
-      <>
-        <path d="M78 90c4 4 10 4 14 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-        <path d="M118 90c4 4 10 4 14 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-        <path d="M102 104c3 3 7 3 10 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      </>
+      <g stroke={INK} strokeWidth="3.4" strokeLinecap="round" fill="none">
+        <path d="M41 39 Q48 45 55 39" />
+        <path d="M65 39 Q72 45 79 39" />
+      </g>
     );
   }
+
   if (mood === "love") {
     return (
+      <g fill="#FF5C93">
+        <path d="M42 34c2.6-3.6 8.6-2.6 8.6 2 0 4-5 7.4-8.6 9.6-3.6-2.2-8.6-5.6-8.6-9.6 0-4.6 6-5.6 8.6-2z" transform="translate(6 0)" />
+        <path d="M42 34c2.6-3.6 8.6-2.6 8.6 2 0 4-5 7.4-8.6 9.6-3.6-2.2-8.6-5.6-8.6-9.6 0-4.6 6-5.6 8.6-2z" transform="translate(30 0)" />
+      </g>
+    );
+  }
+
+  const squint = mood === "celebrate";
+
+  return (
+    <g className="animate-blink" style={{ transformOrigin: "60px 40px" }}>
+      {squint ? (
+        <g stroke={INK} strokeWidth="3.6" strokeLinecap="round" fill="none">
+          <path d="M41 42 Q48 34 55 42" />
+          <path d="M65 42 Q72 34 79 42" />
+        </g>
+      ) : (
+        <>
+          <ellipse cx="48" cy="39" rx="5.1" ry="6.6" fill={INK} />
+          <ellipse cx="72" cy="39" rx="5.1" ry="6.6" fill={INK} />
+          <circle cx="49.9" cy="36.5" r="1.9" fill="#fff" />
+          <circle cx="73.9" cy="36.5" r="1.9" fill="#fff" />
+        </>
+      )}
+    </g>
+  );
+}
+
+function Mouth({ mood }: { mood: GillyMood }) {
+  if (mood === "sleepy") {
+    return <ellipse cx="60" cy="51" rx="4" ry="5" fill={INK} opacity="0.85" />;
+  }
+  if (mood === "celebrate") {
+    return (
       <>
-        <path d="M83 92c2.5-4 9-4 9 1.5 0-5.5 6.5-5.5 9-1.5 2 3.5-5 9-9 11-4-2-11-7.5-9-11z" fill={CLOUD_STROKE} />
-        <path d="M113 92c2.5-4 9-4 9 1.5 0-5.5 6.5-5.5 9-1.5 2 3.5-5 9-9 11-4-2-11-7.5-9-11z" fill={CLOUD_STROKE} />
-        <path d="M98 108c4 4 10 4 14 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+        <path d="M50 49 Q60 62 70 49 Z" fill={INK} />
+        <path d="M54.5 55 Q60 59 65.5 55 Z" fill="#FF7D9C" />
       </>
     );
   }
   return (
-    <>
-      <circle cx="88" cy="94" r="4.5" fill="#24211D" />
-      <circle cx="128" cy="94" r="4.5" fill="#24211D" />
-      <circle cx="79" cy="98" r="6" fill="#F2600A" opacity="0.35" />
-      <circle cx="137" cy="98" r="6" fill="#F2600A" opacity="0.35" />
-      {mood === "celebrate" ? (
-        <path d="M96 106c5 6 15 6 20 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      ) : (
-        <path d="M98 104c4 5 14 5 18 0" stroke="#24211D" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      )}
-    </>
+    <path
+      d={mood === "love" ? "M51 51 Q60 60 69 51" : "M52 50 Q60 58 68 50"}
+      stroke={INK}
+      strokeWidth="3.6"
+      strokeLinecap="round"
+      fill="none"
+    />
   );
 }
 
@@ -48,53 +79,104 @@ export function GillyMascot({
 }) {
   return (
     <svg
-      viewBox="0 0 208 176"
+      viewBox="0 0 200 180"
       width={size}
       height={size}
       className={className}
       role="img"
-      aria-label="Mascote Gilly"
+      aria-label="Gilly, o mascote da loja"
     >
-      <ellipse cx="104" cy="150" rx="52" ry="8" fill="#F2600A" opacity="0.12" />
+      <defs>
+        <radialGradient id="gilly-body" cx="34%" cy="26%" r="82%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="72%" stopColor="#FFF9F2" />
+          <stop offset="100%" stopColor="#FFE9D6" />
+        </radialGradient>
+        <linearGradient id="gilly-shadow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#F2600A" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="#F2600A" stopOpacity="0" />
+        </linearGradient>
+      </defs>
 
-      <g stroke={CLOUD_STROKE} strokeWidth="4">
-        <circle cx="60" cy="88" r="30" fill={CLOUD_FILL} />
-        <circle cx="104" cy="66" r="38" fill={CLOUD_FILL} />
-        <circle cx="150" cy="90" r="28" fill={CLOUD_FILL} />
-        <rect x="46" y="86" width="116" height="46" rx="23" fill={CLOUD_FILL} />
-      </g>
-      <rect x="49" y="89" width="110" height="40" rx="20" fill={CLOUD_FILL} />
+      {/* ground shadow */}
+      <ellipse cx="100" cy="163" rx="46" ry="9" fill="url(#gilly-shadow)" />
 
-      <Face mood={mood} />
-
-      {mood === "wave" && (
-        <g>
-          <circle cx="176" cy="70" r="12" fill="#FFC53D" />
-          <path d="M170 64l6 6-6 6" stroke="#24211D" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        </g>
-      )}
-
+      {/* confetti / accessories behind the body */}
       {mood === "celebrate" && (
         <g>
-          <rect x="96" y="18" width="16" height="20" rx="3" fill="#F14C86" transform="rotate(-10 104 28)" />
-          <circle cx="40" cy="40" r="4" fill="#2FA8D5" />
-          <circle cx="170" cy="36" r="4" fill="#FFC53D" />
-          <circle cx="180" cy="60" r="3" fill="#F14C86" />
-          <circle cx="24" cy="64" r="3" fill="#FFC53D" />
-        </g>
-      )}
-
-      {mood === "search" && (
-        <g transform="translate(150 108) rotate(20)">
-          <circle cx="0" cy="0" r="12" fill="none" stroke="#2FA8D5" strokeWidth="4" />
-          <line x1="9" y1="9" x2="20" y2="20" stroke="#2FA8D5" strokeWidth="4" strokeLinecap="round" />
+          <rect x="30" y="26" width="9" height="13" rx="3" fill="#3FB0E5" transform="rotate(-18 34 32)" />
+          <rect x="160" y="34" width="8" height="12" rx="3" fill="#FF5C93" transform="rotate(22 164 40)" />
+          <circle cx="24" cy="70" r="4.5" fill="#FFC53D" />
+          <circle cx="176" cy="84" r="4" fill="#8B5CF6" />
+          <path d="M150 18 l4 8 l8 4 l-8 4 l-4 8 l-4 -8 l-8 -4 l8 -4 z" fill="#FFC53D" />
         </g>
       )}
 
       {mood === "sleepy" && (
-        <text x="150" y="60" fontSize="18" fill="#2FA8D5" fontFamily="var(--font-display, sans-serif)">
-          zZz
-        </text>
+        <g fill="#3FB0E5" fontFamily="var(--font-display, sans-serif)" fontWeight="700">
+          <text x="150" y="44" fontSize="15" opacity="0.9">z</text>
+          <text x="163" y="30" fontSize="19" opacity="0.7">Z</text>
+          <text x="140" y="26" fontSize="12" opacity="0.5">z</text>
+        </g>
+      )}
+
+      {/* arms */}
+      <g fill="url(#gilly-body)" stroke="#F5B98F" strokeWidth="3">
+        <ellipse
+          cx="34"
+          cy="112"
+          rx="15"
+          ry="11"
+          className={mood === "wave" ? undefined : "animate-float-sm"}
+          style={{ transformOrigin: "44px 112px", ["--tilt" as string]: "4deg" }}
+        />
+        <ellipse
+          cx="166"
+          cy={mood === "wave" ? 84 : 112}
+          rx="15"
+          ry="11"
+          className={mood === "wave" ? "animate-wiggle" : "animate-float-sm"}
+          style={{
+            transformOrigin: "154px 100px",
+            animationIterationCount: mood === "wave" ? "infinite" : undefined,
+            animationDuration: mood === "wave" ? "1.1s" : undefined,
+            ["--tilt" as string]: "-4deg",
+          }}
+        />
+      </g>
+
+      {/* body */}
+      <g transform="translate(40 46) scale(1)">
+        <path d={CLOUD_PATH} fill="url(#gilly-body)" stroke="#F5B98F" strokeWidth="3.4" strokeLinejoin="round" />
+        <ellipse cx="34" cy="47" rx="8.6" ry="5.8" fill="#FFB38A" opacity="0.8" />
+        <ellipse cx="86" cy="47" rx="8.6" ry="5.8" fill="#FFB38A" opacity="0.8" />
+        <Eyes mood={mood} />
+        <Mouth mood={mood} />
+      </g>
+
+      {/* held props */}
+      {mood === "search" && (
+        <g transform="translate(150 104) rotate(18)">
+          <circle cx="0" cy="0" r="16" fill="#DFF2FD" stroke="#1B83BB" strokeWidth="5" />
+          <circle cx="-4" cy="-5" r="5" fill="#fff" opacity="0.8" />
+          <rect x="11" y="11" width="18" height="7" rx="3.5" fill="#1B83BB" transform="rotate(45 11 11)" />
+        </g>
+      )}
+
+      {mood === "love" && (
+        <g fill="#FF5C93" opacity="0.9">
+          <path
+            d="M0 6c2-2.8 6.6-2 6.6 1.6 0 3-3.8 5.6-6.6 7.4-2.8-1.8-6.6-4.4-6.6-7.4C-6.6 4-2 3.2 0 6z"
+            transform="translate(44 34) scale(1.1)"
+            className="animate-float"
+          />
+          <path
+            d="M0 6c2-2.8 6.6-2 6.6 1.6 0 3-3.8 5.6-6.6 7.4-2.8-1.8-6.6-4.4-6.6-7.4C-6.6 4-2 3.2 0 6z"
+            transform="translate(158 48) scale(0.85)"
+            className="animate-float"
+            style={{ animationDelay: "0.8s" }}
+          />
+        </g>
       )}
     </svg>
   );
