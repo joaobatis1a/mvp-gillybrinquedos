@@ -1,69 +1,187 @@
-import Link from "next/link";
-import { GillyMascot } from "@/components/mascot/gilly-mascot";
+"use client";
 
-const FLOATERS = [
-  { emoji: "🚗", top: "8%", left: "8%", delay: "0s" },
-  { emoji: "🧸", top: "62%", left: "4%", delay: "0.6s" },
-  { emoji: "🎮", top: "10%", left: "80%", delay: "0.3s" },
-  { emoji: "⭐", top: "68%", left: "82%", delay: "0.9s" },
-  { emoji: "🍳", top: "38%", left: "88%", delay: "1.2s" },
+import Link from "next/link";
+import { useRef } from "react";
+import { GillyMascot } from "@/components/mascot/gilly-mascot";
+import { ToyArt, type ToyArtKey } from "@/components/toys/toy-art";
+import { ArrowRightIcon, StoreIcon, TruckIcon, CardIcon, PinIcon } from "@/components/icons";
+
+type Floater = {
+  art: ToyArtKey;
+  className: string;
+  size: number;
+  depth: number;
+  delay: string;
+  tilt: string;
+};
+
+const FLOATERS: Floater[] = [
+  { art: "brick", className: "left-[2%] top-[12%]", size: 74, depth: 26, delay: "0s", tilt: "-8deg" },
+  { art: "racecar", className: "right-[4%] top-[6%]", size: 86, depth: 18, delay: "0.7s", tilt: "6deg" },
+  { art: "plush", className: "left-[6%] bottom-[14%]", size: 80, depth: 32, delay: "1.4s", tilt: "5deg" },
+  { art: "dino", className: "right-[0%] bottom-[20%]", size: 78, depth: 22, delay: "0.4s", tilt: "-6deg" },
+  { art: "capsule", className: "right-[24%] bottom-[2%]", size: 58, depth: 38, delay: "1.1s", tilt: "9deg" },
+  { art: "guitar", className: "left-[26%] top-[0%]", size: 62, depth: 14, delay: "1.8s", tilt: "-10deg" },
 ];
 
 export function Hero() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const frame = useRef<number | null>(null);
+
+  function handleMove(event: React.PointerEvent<HTMLDivElement>) {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const rect = stage.getBoundingClientRect();
+    const dx = (event.clientX - rect.left) / rect.width - 0.5;
+    const dy = (event.clientY - rect.top) / rect.height - 0.5;
+
+    if (frame.current !== null) cancelAnimationFrame(frame.current);
+    frame.current = requestAnimationFrame(() => {
+      stage.style.setProperty("--mx", dx.toFixed(3));
+      stage.style.setProperty("--my", dy.toFixed(3));
+    });
+  }
+
+  function handleLeave() {
+    const stage = stageRef.current;
+    if (!stage) return;
+    stage.style.setProperty("--mx", "0");
+    stage.style.setProperty("--my", "0");
+  }
+
   return (
-    <section className="relative overflow-hidden bg-gilly-light/60">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:py-20">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-gilly shadow-sm">
-            🎈 Loja de brinquedos em Paulista, PE
+    <section className="relative overflow-hidden">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pb-16 lg:pt-16">
+        <div className="relative z-10">
+          <span className="inline-flex animate-pop items-center gap-2 rounded-full border-2 border-gilly-light bg-white px-4 py-2 text-xs font-extrabold text-gilly shadow-sm">
+            <PinIcon size={15} />
+            Loja física em Paulista, PE — desde sempre na PE-15
           </span>
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
-            Diversão sem limites,
-            <br />
-            brinquedos <span className="text-gilly">sem igual</span>.
+
+          <h1 className="mt-6 max-w-[15ch] text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] text-ink sm:text-[3.4rem] lg:text-6xl">
+            Brinquedo bom é o que a criança
+            <span className="relative mx-2 inline-block">
+              <span className="relative z-10 text-gilly">não larga</span>
+              <svg
+                viewBox="0 0 200 24"
+                className="absolute -bottom-1 left-0 z-0 w-full text-sun"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <path
+                  d="M4 16C46 6 92 4 140 9c22 2 40 5 56 9"
+                  stroke="currentColor"
+                  strokeWidth="9"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0.85"
+                />
+              </svg>
+            </span>
           </h1>
-          <p className="mt-4 max-w-md text-base text-ink-soft sm:text-lg">
-            Estimulando a imaginação, a criatividade e o aprendizado com os brinquedos
-            preferidos da criançada — da primeira infância aos colecionáveis.
+
+          <p className="mt-6 max-w-lg text-balance text-base leading-relaxed text-ink-soft sm:text-lg">
+            A gente escolhe item por item, abre a caixa, testa e só coloca na prateleira o que daria
+            de presente pros nossos. De LEGO a bebê reborn, com quem entende do assunto do outro lado
+            do balcão.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/categoria/carrinhos"
-              className="rounded-full bg-gilly px-7 py-3.5 font-bold text-white shadow-sm shadow-gilly/30 transition-colors hover:bg-gilly-dark"
+              href="/categorias"
+              className="shine squish group inline-flex items-center gap-2 rounded-full bg-gilly px-7 py-4 font-extrabold text-white shadow-[0_12px_28px_-12px_rgba(242,96,10,0.9)] transition-colors hover:bg-gilly-dark"
             >
-              Ver ofertas
+              Ver a loja inteira
+              <ArrowRightIcon
+                size={19}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </Link>
             <Link
-              href="/categoria/bonecas"
-              className="rounded-full border-2 border-gilly bg-white/70 px-7 py-3.5 font-bold text-gilly transition-colors hover:bg-white"
+              href="/busca?q=promo"
+              className="squish inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-white/80 px-7 py-4 font-extrabold text-ink backdrop-blur transition-all hover:border-gilly hover:bg-white hover:text-gilly-dark"
             >
-              Explorar categorias
+              Quero ver o que tá barato
             </Link>
+          </div>
+
+          <div className="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold text-ink-soft">
+            <span className="flex items-center gap-2">
+              <StoreIcon size={18} className="text-gilly" />
+              Retirada no mesmo dia
+            </span>
+            <span className="flex items-center gap-2">
+              <TruckIcon size={18} className="text-sky-deep" />
+              Entrega na Grande Recife
+            </span>
+            <span className="flex items-center gap-2">
+              <CardIcon size={18} className="text-mint" />
+              Até 10x sem juros
+            </span>
           </div>
         </div>
 
-        <div className="relative mx-auto flex h-72 w-72 items-center justify-center sm:h-96 sm:w-96">
+        {/* palco ilustrado */}
+        <div
+          ref={stageRef}
+          onPointerMove={handleMove}
+          onPointerLeave={handleLeave}
+          className="relative mx-auto aspect-square w-full max-w-[34rem]"
+          style={{ ["--mx" as string]: "0", ["--my" as string]: "0" }}
+        >
+          {/* blobs de fundo */}
+          <div className="absolute inset-[8%] rounded-[45%_55%_52%_48%/48%_45%_55%_52%] bg-gradient-to-br from-gilly-light via-sun-light to-sky-light opacity-80 blur-[2px]" />
+          <div className="absolute inset-[18%] animate-spin-slow rounded-[52%_48%_45%_55%/55%_52%_48%_45%] border-[3px] border-dashed border-white/80" />
+
           {FLOATERS.map((floater) => (
             <span
-              key={floater.emoji}
-              className="absolute animate-float text-4xl drop-shadow-sm sm:text-5xl"
-              style={{ top: floater.top, left: floater.left, animationDelay: floater.delay }}
-              aria-hidden
+              key={floater.art}
+              className={`animate-float-sm absolute drop-shadow-[0_14px_20px_rgba(105,62,20,0.2)] ${floater.className}`}
+              style={{
+                animationDelay: floater.delay,
+                ["--tilt" as string]: floater.tilt,
+                transform: `translate3d(calc(var(--mx) * ${floater.depth}px), calc(var(--my) * ${floater.depth}px), 0)`,
+                transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+              }}
             >
-              {floater.emoji}
+              <ToyArt art={floater.art} size={floater.size} />
             </span>
           ))}
-          <GillyMascot mood="wave" size={220} className="relative" />
+
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              transform: "translate3d(calc(var(--mx) * -14px), calc(var(--my) * -14px), 0)",
+              transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            <GillyMascot mood="wave" size={300} className="drop-shadow-[0_24px_30px_rgba(105,62,20,0.22)]" />
+          </div>
+
+          {/* etiqueta flutuante */}
+          <div
+            className="animate-float absolute bottom-[8%] left-[4%] rounded-2xl border-2 border-border bg-white px-4 py-3 shadow-[var(--shadow-soft)]"
+            style={{ animationDelay: "0.9s" }}
+          >
+            <p className="text-[0.62rem] font-extrabold uppercase tracking-widest text-ink-faint">
+              Oi, eu sou a Gilly
+            </p>
+            <p className="font-display text-sm font-extrabold text-ink">Te ajudo a escolher?</p>
+          </div>
         </div>
       </div>
 
+      {/* onda de transição */}
       <svg
-        className="block w-full text-cream"
-        viewBox="0 0 1440 60"
+        className="block w-full text-white/70"
+        viewBox="0 0 1440 70"
         preserveAspectRatio="none"
         aria-hidden
       >
-        <path fill="currentColor" d="M0 30C240 60 480 0 720 15C960 30 1200 60 1440 30V60H0V30Z" />
+        <path
+          fill="currentColor"
+          d="M0 34c180 34 360 44 540 24s360-52 540-30 240 40 360 34v12H0z"
+        />
       </svg>
     </section>
   );
