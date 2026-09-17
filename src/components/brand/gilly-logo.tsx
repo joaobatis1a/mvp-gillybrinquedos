@@ -1,42 +1,50 @@
 import Link from "next/link";
-import { GillyMark } from "@/components/brand/gilly-mark";
+import Image from "next/image";
+import logo from "../../../public/brand/gilly-logo.png";
 
 type LogoProps = {
   size?: "sm" | "md" | "lg";
-  tone?: "default" | "light";
   href?: string | null;
   className?: string;
+  /** esconde a legenda "Loja de brinquedos" ao lado da marca */
+  hideCaption?: boolean;
+  /** "light" ajusta a legenda para textos sobre fundo escuro (ex.: rodapé) */
+  tone?: "default" | "light";
 };
 
-const MARK_SIZE = { sm: 36, md: 44, lg: 60 } as const;
-const WORD_SIZE = {
-  sm: "text-lg",
-  md: "text-[1.45rem]",
-  lg: "text-3xl",
-} as const;
-const SUB_SIZE = {
-  sm: "text-[0.5rem] tracking-[0.34em]",
-  md: "text-[0.55rem] tracking-[0.38em]",
-  lg: "text-[0.7rem] tracking-[0.4em]",
+const MARK_SIZE = { sm: 38, md: 46, lg: 64 } as const;
+const CAPTION_SIZE = {
+  sm: "text-[0.6rem]",
+  md: "text-[0.65rem]",
+  lg: "text-xs",
 } as const;
 
-export function GillyLogo({ size = "md", tone = "default", href = "/", className }: LogoProps) {
-  const wordColor = tone === "light" ? "text-white" : "text-gilly";
-  const subColor = tone === "light" ? "text-white/70" : "text-ink-soft";
-
+export function GillyLogo({
+  size = "md",
+  href = "/",
+  className,
+  hideCaption,
+  tone = "default",
+}: LogoProps) {
   const content = (
     <span className={`group/logo flex shrink-0 items-center gap-2.5 ${className ?? ""}`}>
-      <span className="transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-105">
-        <GillyMark size={MARK_SIZE[size]} />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className={`font-display font-extrabold ${WORD_SIZE[size]} ${wordColor}`}>
-          Gilly
+      <Image
+        src={logo}
+        alt="Gilly Brinquedos"
+        width={MARK_SIZE[size]}
+        height={MARK_SIZE[size]}
+        priority
+        className="rounded-full shadow-[0_2px_6px_rgba(105,62,20,0.25)] transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-105"
+      />
+      {!hideCaption && (
+        <span
+          className={`hidden font-semibold uppercase tracking-[0.16em] sm:inline ${CAPTION_SIZE[size]} ${
+            tone === "light" ? "text-white/60" : "text-ink-soft"
+          }`}
+        >
+          Loja de brinquedos
         </span>
-        <span className={`font-semibold uppercase ${SUB_SIZE[size]} ${subColor}`}>
-          Brinquedos
-        </span>
-      </span>
+      )}
     </span>
   );
 

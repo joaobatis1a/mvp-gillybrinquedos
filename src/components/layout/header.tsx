@@ -5,10 +5,11 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { GillyLogo } from "@/components/brand/gilly-logo";
 import { SearchBar } from "@/components/layout/search-bar";
 import { CartBadge } from "@/components/layout/cart-badge";
+import { FavoritesBadge } from "@/components/layout/favorites-badge";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { CategoryStrip } from "@/components/layout/category-nav";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
-import { ToyArt } from "@/components/toys/toy-art";
+import { CategoryThumb } from "@/components/category/category-thumb";
 import { categories } from "@/lib/data/categories";
 import {
   MenuIcon,
@@ -19,15 +20,6 @@ import {
   GiftIcon,
   ArrowRightIcon,
 } from "@/components/icons";
-
-const ACCENT_BG = {
-  gilly: "bg-gilly-light",
-  sky: "bg-sky-light",
-  candy: "bg-candy-light",
-  sun: "bg-sun-light",
-  mint: "bg-mint-light",
-  grape: "bg-grape-light",
-} as const;
 
 export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
@@ -98,6 +90,7 @@ export function Header() {
               <GiftIcon size={19} />
               Presentes
             </Link>
+            <FavoritesBadge />
             <AccountMenu />
             <CartBadge />
           </div>
@@ -138,11 +131,7 @@ export function Header() {
                         onClick={() => setMegaOpen(false)}
                         className="group flex items-center gap-3 rounded-2xl p-2.5 transition-colors hover:bg-cream-deep"
                       >
-                        <span
-                          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${ACCENT_BG[category.accent]} transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110`}
-                        >
-                          <ToyArt art={category.art} size={30} />
-                        </span>
+                        <CategoryThumb category={category} size={48} />
                         <span className="min-w-0">
                           <span className="block truncate text-sm font-extrabold text-ink group-hover:text-gilly-dark">
                             {category.shortName}
@@ -229,11 +218,7 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     className="group flex items-center gap-3 rounded-2xl bg-white/70 p-3 transition-colors hover:bg-white"
                   >
-                    <span
-                      className={`flex h-11 w-11 items-center justify-center rounded-2xl ${ACCENT_BG[category.accent]}`}
-                    >
-                      <ToyArt art={category.art} size={28} />
-                    </span>
+                    <CategoryThumb category={category} size={44} />
                     <span className="min-w-0">
                       <span className="block text-sm font-extrabold text-ink">
                         {category.shortName}
@@ -249,6 +234,7 @@ export function Header() {
               </p>
               <div className="mt-3 grid gap-1.5">
                 {[
+                  { href: "/favoritos", label: "Meus favoritos" },
                   { href: "/conta/pedidos", label: "Meus pedidos" },
                   { href: "/conta/enderecos", label: "Meus endereços" },
                   { href: "/conta/dados", label: "Meus dados" },
