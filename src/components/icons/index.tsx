@@ -105,9 +105,10 @@ export const StoreIcon = (p: IconProps) => (
 
 export const CardIcon = (p: IconProps) => (
   <Icon {...p}>
-    <rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.6" />
-    <path d="M2.8 10h18.4" />
-    <path d="M6.6 15h3.2" />
+    <rect x="1.6" y="8.4" width="14.6" height="10" rx="2.1" transform="rotate(-10 1.6 8.4)" opacity="0.55" />
+    <rect x="6.2" y="4.6" width="16.2" height="11.2" rx="2.3" />
+    <path d="M6.2 9h16.2" />
+    <path d="M9.6 13.4h4.4" />
   </Icon>
 );
 
@@ -118,10 +119,37 @@ export const PixIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const PixBadgeIcon = (p: IconProps) => (
+  <Icon {...p} strokeWidth="0">
+    <path
+      d="M12 2.6l4.3 4.3a3 3 0 0 1 0 4.2L12 15.4 7.7 11.1a3 3 0 0 1 0-4.2z"
+      fill="#2DBEA8"
+    />
+    <path
+      d="M12 8.6l4.3 4.3a3 3 0 0 1 0 4.2L12 21.4l-4.3-4.3a3 3 0 0 1 0-4.2z"
+      fill="#2DBEA8"
+    />
+  </Icon>
+);
+
 export const WhatsAppIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M20 11.7A7.9 7.9 0 0 1 8.2 18.8L4 20l1.3-4.1A7.9 7.9 0 1 1 20 11.7z" />
     <path d="M9.3 9.2c.4 2.6 2.6 4.6 5.2 5 .5.1 1-.2 1.2-.7l.2-.6-1.9-.9-.7.8a5 5 0 0 1-2.4-2.3l.8-.7-.9-1.9-.6.2c-.5.2-.8.6-.9 1.1z" />
+  </Icon>
+);
+
+export const WhatsAppBadgeIcon = (p: IconProps) => (
+  <Icon {...p} strokeWidth="0">
+    <circle cx="12" cy="12" r="10" fill="#25D366" />
+    <path
+      d="M17 10.9A5.2 5.2 0 0 1 8.9 15.7L6.5 16.4l.7-2.3A5.2 5.2 0 1 1 17 10.9z"
+      fill="#fff"
+    />
+    <path
+      d="M9.9 9.5c.3 1.9 1.7 3.3 3.6 3.6.3.1.7-.1.8-.5l.1-.4-1.3-.7-.5.5a3.6 3.6 0 0 1-1.6-1.6l.5-.5-.7-1.3-.4.1c-.4.1-.6.4-.5.8z"
+      fill="#25D366"
+    />
   </Icon>
 );
 

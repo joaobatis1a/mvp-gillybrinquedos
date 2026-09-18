@@ -1,6 +1,6 @@
 import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import { Reveal } from "@/components/effects/reveal";
-import { PinIcon, ClockIcon, WhatsAppIcon, InstagramIcon, ArrowRightIcon } from "@/components/icons";
+import { PinIcon, ClockIcon, WhatsAppBadgeIcon, InstagramIcon, ArrowRightIcon } from "@/components/icons";
 
 const MAPS_QUERY = encodeURIComponent(
   "Rodovia PE-15, Km 16,5, Nº 242, Centro, Paulista, PE",
@@ -65,9 +65,7 @@ export function StoreCard() {
                   href="https://wa.me/558198930095"
                   className="shine squish group inline-flex items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(63,196,160,0.85)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-12px_rgba(63,196,160,0.95)]"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/25">
-                    <WhatsAppIcon size={18} />
-                  </span>
+                  <WhatsAppBadgeIcon size={30} className="shrink-0" />
                   Chamar no WhatsApp
                   <ArrowRightIcon
                     size={17}

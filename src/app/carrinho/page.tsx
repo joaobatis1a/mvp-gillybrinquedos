@@ -55,7 +55,7 @@ export default function CarrinhoPage() {
             )}
             {freeShipping && (
               <p className="text-xs font-semibold text-success">
-                🎉 Frete grátis será aplicado na entrega econômica
+                Frete grátis será aplicado na entrega econômica
               </p>
             )}
             <div className="flex justify-between border-t border-border pt-2 font-display text-base font-bold text-ink">

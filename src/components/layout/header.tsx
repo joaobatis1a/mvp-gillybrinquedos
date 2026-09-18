@@ -11,17 +11,9 @@ import { CategoryStrip } from "@/components/layout/category-nav";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CategoryThumb } from "@/components/category/category-thumb";
 import { categories } from "@/lib/data/categories";
-import {
-  MenuIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  SparkleIcon,
-  TagIcon,
-  ArrowRightIcon,
-} from "@/components/icons";
+import { MenuIcon, CloseIcon } from "@/components/icons";
 
 export function Header() {
-  const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -65,18 +57,6 @@ export function Header() {
 
           <GillyLogo size="md" />
 
-          <button
-            onClick={() => setMegaOpen((v) => !v)}
-            aria-expanded={megaOpen}
-            className="squish ml-2 hidden items-center gap-1.5 rounded-full border-2 border-border px-4 py-2.5 text-sm font-extrabold text-ink transition-all duration-300 hover:border-gilly hover:bg-gilly-tint hover:text-gilly-dark lg:flex"
-          >
-            Categorias
-            <ChevronDownIcon
-              size={16}
-              className={`transition-transform duration-300 ${megaOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
           <Suspense fallback={<div className="hidden flex-1 lg:block" />}>
             <SearchBar className="hidden flex-1 lg:block" />
           </Suspense>
@@ -98,85 +78,6 @@ export function Header() {
           </Suspense>
         </div>
       </div>
-
-      {/* mega menu */}
-      {megaOpen && (
-        <>
-          <button
-            aria-hidden
-            tabIndex={-1}
-            className="fixed inset-0 z-30 cursor-default bg-ink/20 backdrop-blur-[2px]"
-            onClick={() => setMegaOpen(false)}
-          />
-          <div className="absolute left-0 right-0 top-full z-40 px-4 pt-3 sm:px-6">
-            <div className="mx-auto max-w-7xl animate-pop overflow-hidden rounded-[2rem] border-2 border-border bg-white shadow-[var(--shadow-lift)]">
-              <div className="grid gap-6 p-6 lg:grid-cols-[1.6fr_1fr]">
-                <div>
-                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-faint">
-                    Todas as categorias
-                  </p>
-                  <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3">
-                    {categories.map((category) => (
-                      <Link
-                        key={category.slug}
-                        href={`/categoria/${category.slug}`}
-                        onClick={() => setMegaOpen(false)}
-                        className="group flex items-center gap-3 rounded-2xl p-2.5 transition-colors hover:bg-cream-deep"
-                      >
-                        <CategoryThumb category={category} size={48} />
-                        <span className="min-w-0">
-                          <span className="block truncate text-sm font-extrabold text-ink group-hover:text-gilly-dark">
-                            {category.shortName}
-                          </span>
-                          <span className="block truncate text-xs text-ink-soft">
-                            {category.blurb}
-                          </span>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-3">
-                  <Link
-                    href="/busca?q=promo"
-                    onClick={() => setMegaOpen(false)}
-                    className="group relative flex-1 overflow-hidden rounded-3xl bg-gilly p-5 text-white"
-                  >
-                    <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-white/15 transition-transform duration-500 group-hover:scale-125" />
-                    <TagIcon size={24} className="relative" />
-                    <p className="relative mt-3 font-display text-xl font-extrabold leading-tight">
-                      Promoções da semana
-                    </p>
-                    <p className="relative mt-1 text-sm text-white/85">
-                      Tem coisa boa saindo com desconto de verdade.
-                    </p>
-                    <span className="relative mt-3 inline-flex items-center gap-1.5 text-sm font-bold">
-                      Ver ofertas
-                      <ArrowRightIcon
-                        size={17}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      />
-                    </span>
-                  </Link>
-
-                  <Link
-                    href="/busca?q=novidade"
-                    onClick={() => setMegaOpen(false)}
-                    className="group flex items-center gap-3 rounded-3xl border-2 border-border p-4 transition-colors hover:border-sky hover:bg-sky-light"
-                  >
-                    <SparkleIcon size={22} className="text-sky-deep" />
-                    <span>
-                      <span className="block text-sm font-extrabold text-ink">Acabou de chegar</span>
-                      <span className="block text-xs text-ink-soft">Novidades da semana na loja</span>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
 
       {/* menu mobile */}
       {mobileOpen && (

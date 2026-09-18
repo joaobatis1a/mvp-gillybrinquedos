@@ -6,8 +6,9 @@ import {
   PinIcon,
   ClockIcon,
   WhatsAppIcon,
+  WhatsAppBadgeIcon,
   InstagramIcon,
-  PixIcon,
+  PixBadgeIcon,
   CardIcon,
   ShieldIcon,
   ArrowRightIcon,
@@ -50,9 +51,7 @@ export function Footer() {
             href="https://wa.me/558198930095"
             className="shine squish group inline-flex shrink-0 items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-ink shadow-[0_14px_26px_-10px_rgba(63,196,160,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-10px_rgba(63,196,160,0.7)]"
           >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/35">
-              <WhatsAppIcon size={18} />
-            </span>
+            <WhatsAppBadgeIcon size={30} className="shrink-0" />
             Chamar no WhatsApp
             <ArrowRightIcon
               size={17}
@@ -165,7 +164,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4 text-xs font-semibold text-white/60">
             <span className="flex items-center gap-1.5">
-              <PixIcon size={16} />
+              <PixBadgeIcon size={16} />
               Pix
             </span>
             <span className="flex items-center gap-1.5">

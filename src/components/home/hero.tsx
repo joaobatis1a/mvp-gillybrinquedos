@@ -10,7 +10,7 @@ import {
   CardIcon,
   PinIcon,
   SparkleIcon,
-  WhatsAppIcon,
+  WhatsAppBadgeIcon,
 } from "@/components/icons";
 
 export function Hero() {
@@ -118,21 +118,32 @@ export function Hero() {
           className="relative mx-auto aspect-square w-full max-w-[34rem]"
           style={{ ["--mx" as string]: "0", ["--my" as string]: "0" }}
         >
-          {/* fundo neutro atrás da mascote — um único tom, sem degradê */}
-          <div className="absolute inset-[10%] rounded-full bg-gilly-tint" />
-          <div className="absolute inset-[19%] rounded-full border border-gilly-light" />
+          {/* sol nascendo atrás da mascote, no clima do céu do resto do site */}
+          <div
+            aria-hidden
+            className="animate-glow absolute -right-[4%] -top-[2%] h-[52%] w-[52%] rounded-full blur-2xl"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(255,197,61,0.6) 0%, rgba(242,96,10,0.22) 55%, transparent 76%)",
+            }}
+          />
+          <div className="absolute inset-[16%] rounded-full bg-gilly-tint/70" />
 
-          {/* anel pontilhado girando devagar, dá vida ao palco sem poluir */}
-          <svg viewBox="0 0 100 100" className="animate-spin-slow absolute inset-[13%] text-gilly-light">
-            <circle
-              cx="50"
-              cy="50"
-              r="48"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeDasharray="1 7"
-              strokeLinecap="round"
+          {/* nuvenzinhas passando perto da mascote */}
+          <svg viewBox="0 0 120 72" className="animate-float-sm absolute left-[2%] top-[6%] w-[30%] text-white">
+            <path
+              d="M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z"
+              fill="currentColor"
+            />
+          </svg>
+          <svg
+            viewBox="0 0 120 72"
+            className="animate-float-sm absolute bottom-[10%] right-[4%] w-[22%] text-white opacity-90"
+            style={{ animationDelay: "1.2s" }}
+          >
+            <path
+              d="M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z"
+              fill="currentColor"
             />
           </svg>
 
@@ -177,9 +188,7 @@ export function Hero() {
             className="animate-float squish absolute right-[0%] top-[38%] flex items-center gap-2 rounded-2xl border-2 border-border bg-white px-3.5 py-2.5 shadow-[var(--shadow-soft)] transition-colors hover:border-mint"
             style={{ animationDelay: "1.6s" }}
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mint/15 text-mint">
-              <WhatsAppIcon size={16} />
-            </span>
+            <WhatsAppBadgeIcon size={30} className="shrink-0" />
             <span className="font-display text-xs font-extrabold leading-tight text-ink">
               Chama no
               <br />
