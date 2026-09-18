@@ -30,14 +30,15 @@ export function StoreCard() {
                 ainda embrulha pra presente. Se não der, a gente manda pra sua casa.
               </p>
 
-              <div className="relative mt-7 grid gap-3 sm:grid-cols-2">
-                <div className="flex items-start gap-3 rounded-2xl border border-border/70 bg-white p-4 shadow-[var(--shadow-soft)] transition-transform duration-300 hover:-translate-y-0.5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gilly-light text-gilly-dark">
-                    <PinIcon size={21} />
-                  </span>
+              {/* ticket da loja: endereço e horário como um bilhete, com perfuração no meio */}
+              <div className="relative mt-7 flex overflow-hidden rounded-2xl border border-border/70 bg-white shadow-[var(--shadow-soft)]">
+                <div className="flex flex-1 items-start gap-2.5 p-4">
+                  <PinIcon size={18} className="mt-0.5 shrink-0 text-gilly" />
                   <div>
-                    <p className="font-display text-sm font-extrabold text-ink">Onde fica</p>
-                    <p className="text-sm text-ink-soft">
+                    <p className="font-display text-xs font-extrabold uppercase tracking-wide text-ink-faint">
+                      Onde fica
+                    </p>
+                    <p className="text-sm font-semibold text-ink">
                       Rodovia PE-15, Km 16,5, nº 242
                       <br />
                       Centro, Paulista, PE
@@ -45,13 +46,18 @@ export function StoreCard() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 rounded-2xl border border-border/70 bg-white p-4 shadow-[var(--shadow-soft)] transition-transform duration-300 hover:-translate-y-0.5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sky-light text-sky-deep">
-                    <ClockIcon size={21} />
-                  </span>
+                <div className="relative w-px shrink-0 bg-[repeating-linear-gradient(to_bottom,var(--color-border)_0,var(--color-border)_6px,transparent_6px,transparent_12px)]">
+                  <span className="absolute -top-2.5 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-cream-deep" />
+                  <span className="absolute -bottom-2.5 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-cream-deep" />
+                </div>
+
+                <div className="flex flex-1 items-start gap-2.5 p-4">
+                  <ClockIcon size={18} className="mt-0.5 shrink-0 text-gilly" />
                   <div>
-                    <p className="font-display text-sm font-extrabold text-ink">Horário</p>
-                    <p className="text-sm text-ink-soft">
+                    <p className="font-display text-xs font-extrabold uppercase tracking-wide text-ink-faint">
+                      Horário
+                    </p>
+                    <p className="text-sm font-semibold text-ink">
                       Seg a sáb, 9h às 18h
                       <br />
                       Domingo a loja descansa
@@ -74,9 +80,15 @@ export function StoreCard() {
                 </a>
                 <a
                   href="https://www.instagram.com/gillybrinquedos/"
-                  className="squish inline-flex items-center gap-2 rounded-full border-2 border-border bg-white px-6 py-3.5 font-extrabold text-ink transition-colors hover:border-candy hover:text-candy"
+                  className="squish inline-flex items-center gap-2.5 rounded-full py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(214,36,159,0.55)] transition-all hover:-translate-y-0.5"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 105%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
+                  }}
                 >
-                  <InstagramIcon size={19} />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/25">
+                    <InstagramIcon size={17} />
+                  </span>
                   @gillybrinquedos
                 </a>
               </div>

@@ -1,38 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Reveal } from "@/components/effects/reveal";
 import { ArrowRightIcon, TagIcon, SparkleIcon } from "@/components/icons";
-
-const CORNER_TOYS = [
-  {
-    src: "https://m.media-amazon.com/images/I/511uNX5p+CL._AC_SX679_.jpg",
-    className: "left-[6%] top-[14%]",
-    size: 68,
-    delay: "0s",
-    tilt: "-10deg",
-  },
-  {
-    src: "https://http2.mlstatic.com/D_NQ_NP_802227-MLB52854556942_122022-O.webp",
-    className: "left-[16%] bottom-[10%]",
-    size: 56,
-    delay: "0.9s",
-    tilt: "7deg",
-  },
-  {
-    src: "https://m.media-amazon.com/images/I/71NZ4m2GbHL._AC_SX679_.jpg",
-    className: "right-[8%] top-[10%]",
-    size: 64,
-    delay: "0.5s",
-    tilt: "8deg",
-  },
-  {
-    src: "https://m.media-amazon.com/images/I/71yJ6Tu7+zL._AC_SX679_.jpg",
-    className: "right-[20%] bottom-[8%]",
-    size: 60,
-    delay: "1.4s",
-    tilt: "-6deg",
-  },
-] as const;
 
 const SPARKLES = [
   { className: "left-[30%] top-[18%]", size: 16, delay: "0s" },
@@ -44,15 +12,7 @@ export function PromoBanner() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <Reveal variant="zoom">
-        <div
-          className="relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-center text-white sm:px-12 sm:py-16"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, #2B2018 0%, #5A2E12 45%, #8F3400 80%, #C94A02 100%)",
-            backgroundSize: "220% 220%",
-            animation: "gradient-pan 12s ease-in-out infinite",
-          }}
-        >
+        <div className="promo-surface relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-center text-white sm:px-12 sm:py-16">
           {/* brilhos de destaque nos cantos */}
           <div
             aria-hidden
@@ -77,27 +37,6 @@ export function PromoBanner() {
           />
           {/* brilho automático passando pelo banner inteiro */}
           <div className="shine-loop pointer-events-none absolute inset-0" />
-
-          {CORNER_TOYS.map((toy) => (
-            <span
-              key={toy.src}
-              className={`animate-float absolute hidden lg:block ${toy.className}`}
-              style={{
-                width: toy.size,
-                height: toy.size,
-                animationDelay: toy.delay,
-                transform: `rotate(${toy.tilt})`,
-              }}
-            >
-              <Image
-                src={toy.src}
-                alt=""
-                fill
-                sizes={`${toy.size}px`}
-                className="object-contain mix-blend-multiply"
-              />
-            </span>
-          ))}
 
           {SPARKLES.map((sparkle, index) => (
             <span

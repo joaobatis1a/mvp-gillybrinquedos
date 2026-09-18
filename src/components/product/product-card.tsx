@@ -34,7 +34,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
   return (
     <TiltCard strength={4}>
-      <article className="tilt-card glare group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-shadow duration-200 hover:shadow-[0_10px_28px_-10px_rgba(43,32,24,0.24)]">
+      <article className="tilt-card group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-shadow duration-200 hover:shadow-[0_10px_28px_-10px_rgba(43,32,24,0.24)]">
         <Link href={`/produto/${product.slug}`} className="tilt-layer relative block">
           <ProductPhoto
             src={product.images?.[0]}

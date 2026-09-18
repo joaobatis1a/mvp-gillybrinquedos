@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { GillyLogo } from "@/components/brand/gilly-logo";
-import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import { categories } from "@/lib/data/categories";
 import {
   PinIcon,
@@ -11,7 +10,6 @@ import {
   PixIcon,
   CardIcon,
   ShieldIcon,
-  ArrowRightIcon,
   TruckIcon,
 } from "@/components/icons";
 
@@ -32,53 +30,29 @@ const HELP_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-16 bg-ink text-white/80">
-      {/* faixa de contato com a mascote — é o toque pessoal do rodapé */}
-      <div className="relative border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-4 py-8 sm:flex-row sm:justify-between sm:px-6">
-          <div className="flex items-center gap-4 text-center sm:text-left">
-            <GillyMascot mood="wave" size={56} className="hidden shrink-0 sm:block" />
-            <div>
-              <p className="font-display text-xl font-extrabold text-white sm:text-2xl">
-                Ficou com dúvida sobre algum brinquedo?
-              </p>
-              <p className="mt-1 text-sm text-white/60">
-                Fala com a gente no WhatsApp, respondemos rapidinho e sem robô.
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://wa.me/558198930095"
-            className="shine squish group inline-flex shrink-0 items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-ink shadow-[0_14px_26px_-10px_rgba(63,196,160,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-10px_rgba(63,196,160,0.7)]"
-          >
-            <WhatsAppBadgeIcon size={30} className="shrink-0" />
-            Chamar no WhatsApp
-            <ArrowRightIcon
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </a>
-        </div>
-      </div>
-
+    <footer className="promo-surface relative mt-16 text-white/80">
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_0.9fr_0.9fr_1.1fr]">
         <div>
           <GillyLogo size="lg" tone="light" />
           <p className="mt-4 max-w-xs leading-relaxed text-white/60">
             Loja de bairro em Paulista, atendendo a Grande Recife e enviando pra todo o Brasil.
           </p>
-          <div className="mt-5 flex gap-2">
+          <div className="mt-5 flex gap-2.5">
             <a
               href="https://wa.me/558198930095"
               aria-label="Chamar a Gilly Brinquedos no WhatsApp"
-              className="squish flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-mint hover:text-mint"
+              className="squish"
             >
-              <WhatsAppIcon size={20} />
+              <WhatsAppBadgeIcon size={40} />
             </a>
             <a
               href="https://www.instagram.com/gillybrinquedos/"
               aria-label="Ver o Instagram da Gilly Brinquedos"
-              className="squish flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-candy hover:text-candy"
+              className="squish flex h-10 w-10 items-center justify-center rounded-full text-white"
+              style={{
+                background:
+                  "radial-gradient(circle at 30% 105%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
+              }}
             >
               <InstagramIcon size={20} />
             </a>

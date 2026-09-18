@@ -8,7 +8,6 @@ import { FavoritesBadge } from "@/components/layout/favorites-badge";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CategoryThumb } from "@/components/category/category-thumb";
-import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import { categories } from "@/lib/data/categories";
 import {
   MenuIcon,
@@ -107,7 +106,7 @@ export function Header() {
             <Link
               href="/conta/login"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-3 bg-gilly px-5 py-5 text-white"
+              className="flex items-center gap-3 bg-gilly py-5 pl-5 pr-14 text-white"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/20">
                 <UserIcon size={22} />
@@ -118,7 +117,6 @@ export function Header() {
                 </span>
                 <span className="block text-xs text-white/80">Pedidos, favoritos e mais</span>
               </span>
-              <ChevronRightIcon size={18} />
             </Link>
 
             <div className="flex items-center gap-2.5 border-b border-border px-5 py-3.5 text-sm">
@@ -136,7 +134,7 @@ export function Header() {
               <CloseIcon size={18} />
             </button>
 
-            <div className="flex-1 overflow-y-auto">
+            <div className="thin-scrollbar flex-1 overflow-y-auto">
               <div className="border-b border-border py-2">
                 {QUICK_LINKS.map(({ href, label, Icon }) => (
                   <Link
@@ -177,16 +175,6 @@ export function Header() {
                   </Link>
                 ))}
               </div>
-            </div>
-
-            <div className="flex items-center gap-3 border-t border-border px-5 py-4">
-              <GillyMascot mood="wave" size={40} className="shrink-0" />
-              <a
-                href="https://wa.me/558198930095"
-                className="squish flex-1 rounded-2xl bg-gilly px-4 py-3 text-center text-sm font-extrabold text-white"
-              >
-                Falar no WhatsApp
-              </a>
             </div>
           </div>
         </div>

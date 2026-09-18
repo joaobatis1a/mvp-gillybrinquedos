@@ -22,10 +22,10 @@ function CloudLabel({ children, className }: { children: ReactNode; className?: 
       <svg
         viewBox="0 0 120 72"
         preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full drop-shadow-[var(--shadow-soft)]"
+        className="absolute inset-0 h-full w-full text-white"
         aria-hidden
       >
-        <path d={CLOUD_PATH} fill="#fff" stroke="#F0E0CD" strokeWidth="2.2" strokeLinejoin="round" />
+        <path d={CLOUD_PATH} fill="currentColor" />
       </svg>
       <div className="relative">{children}</div>
     </div>
