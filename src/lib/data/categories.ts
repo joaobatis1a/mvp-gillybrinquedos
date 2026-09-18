@@ -66,7 +66,8 @@ export const categories: Category[] = [
     name: "Arte e criatividade",
     shortName: "Criativos",
     art: "dough",
-    image: "https://m.media-amazon.com/images/I/61nSd9krKtL._AC_SX679_.jpg",
+    image:
+      "https://http2.mlstatic.com/D_Q_NP_2X_889914-MLB77997638874_082024-E-maleta-pintura-para-desenhos-profissional-arte-infantil-top.webp",
     accent: "mint",
     description: "Massinha, slime, tintas e kits que sujam a mesa do jeito certo.",
     blurb: "Sujeira boa é sujeira criativa",

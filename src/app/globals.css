@@ -136,13 +136,13 @@ body {
 }
 
 @keyframes drift {
-  from { transform: translateX(-20%); }
-  to { transform: translateX(120%); }
+  from { transform: translateX(-20vw); }
+  to { transform: translateX(120vw); }
 }
 
 @keyframes drift-back {
-  from { transform: translateX(120%); }
-  to { transform: translateX(-20%); }
+  from { transform: translateX(120vw); }
+  to { transform: translateX(-20vw); }
 }
 
 @keyframes sway {
@@ -226,7 +226,10 @@ body {
 
 @keyframes stripe-pan {
   from { background-position: 0 0; }
-  to { background-position: 92px 0; }
+  /* 46px é o período da listra (18px branco + 28px transparente) ao longo do eixo
+     de 115deg; dividido por sin(115deg) dá o deslocamento horizontal que fecha
+     o loop sem salto — qualquer outro valor mostra uma "costura" no fim do ciclo. */
+  to { background-position: 50.76px 0; }
 }
 
 /* ---------- animation utilities ---------- */

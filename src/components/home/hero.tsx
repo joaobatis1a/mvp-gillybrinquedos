@@ -18,7 +18,7 @@ const CLOUD_PATH =
 /** Etiqueta com formato de nuvem, no mesmo desenho (gordinho) das nuvens decorativas ao redor. */
 function CloudLabel({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`relative flex aspect-[5/3] items-center justify-center px-6 ${className ?? ""}`}>
+    <div className={`relative flex aspect-[5/3] items-center justify-center px-5 ${className ?? ""}`}>
       <svg viewBox="0 0 120 72" className="absolute inset-0 h-full w-full text-white" aria-hidden>
         <path d={CLOUD_PATH} fill="currentColor" />
       </svg>
@@ -182,7 +182,7 @@ export function Hero() {
 
           {/* etiqueta flutuante */}
           <div
-            className="animate-float absolute bottom-[1%] left-[-2%] w-[52%]"
+            className="animate-float absolute bottom-[3%] left-[2%] w-[40%]"
             style={{ animationDelay: "0.9s" }}
           >
             <CloudLabel className="flex-col">
@@ -198,7 +198,7 @@ export function Hero() {
           {/* etiqueta flutuante secundária */}
           <a
             href="https://wa.me/558198930095"
-            className="animate-float squish absolute right-[-6%] top-[31%] block w-[46%]"
+            className="animate-float squish absolute right-[-2%] top-[32%] block w-[36%]"
             style={{ animationDelay: "1.6s" }}
           >
             <CloudLabel>
