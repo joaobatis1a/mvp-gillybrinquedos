@@ -42,7 +42,7 @@ export function PromoBanner() {
               Tem brinquedo saindo com até 25% off
             </h2>
             <p className="mt-4 text-white/90">
-              Separamos o que tá com preço bom de verdade — sem aquela história de aumentar antes pra
+              Separamos o que tá com preço bom de verdade, sem aquela história de aumentar antes pra
               dar desconto depois.
             </p>
             <Link

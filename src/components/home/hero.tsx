@@ -55,7 +55,7 @@ export function Hero() {
         <div className="relative z-10">
           <span className="inline-flex animate-pop items-center gap-2 rounded-full border-2 border-gilly-light bg-white px-4 py-2 text-xs font-extrabold text-gilly shadow-sm">
             <PinIcon size={15} />
-            Loja física em Paulista, PE — desde sempre na PE-15
+            Loja física em Paulista, PE, bem na beira da PE-15
           </span>
 
           <h1 className="mt-6 max-w-[15ch] text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] text-ink sm:text-[3.4rem] lg:text-6xl">

@@ -254,7 +254,7 @@ export function FilteredProducts({ products }: { products: Product[] }) {
                 Nada bateu com esses filtros
               </p>
               <p className="max-w-sm text-ink-soft">
-                Tenta afrouxar um pouco — tirar uma marca ou subir o preço costuma resolver.
+                Tenta afrouxar um pouco: tirar uma marca ou subir o preço costuma resolver.
               </p>
               <button
                 onClick={clearAll}

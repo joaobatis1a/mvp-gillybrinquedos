@@ -17,7 +17,6 @@ import {
   ChevronDownIcon,
   SparkleIcon,
   TagIcon,
-  GiftIcon,
   ArrowRightIcon,
 } from "@/components/icons";
 
@@ -83,13 +82,6 @@ export function Header() {
           </Suspense>
 
           <div className="ml-auto flex items-center gap-1">
-            <Link
-              href="/categoria/jogos"
-              className="squish hidden items-center gap-1.5 rounded-2xl px-3 py-2.5 text-sm font-bold text-ink transition-colors hover:bg-sun-light hover:text-gilly-dark xl:flex"
-            >
-              <GiftIcon size={19} />
-              Presentes
-            </Link>
             <FavoritesBadge />
             <AccountMenu />
             <CartBadge />

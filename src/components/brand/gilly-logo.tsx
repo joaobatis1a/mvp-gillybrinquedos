@@ -6,52 +6,42 @@ type LogoProps = {
   size?: "sm" | "md" | "lg";
   href?: string | null;
   className?: string;
-  /** esconde a legenda "Loja de brinquedos" ao lado da marca */
-  hideCaption?: boolean;
-  /** "light" ajusta a legenda para textos sobre fundo escuro (ex.: rodapé) */
+  /** "light" troca a cor do texto para uso sobre fundo escuro (ex.: rodapé) */
   tone?: "default" | "light";
 };
 
-const MARK_SIZE = { sm: 38, md: 46, lg: 64 } as const;
-const CAPTION_SIZE = {
-  sm: "text-[0.6rem]",
-  md: "text-[0.65rem]",
-  lg: "text-xs",
+const MARK_SIZE = { sm: 36, md: 44, lg: 60 } as const;
+const WORD_SIZE = {
+  sm: "text-lg",
+  md: "text-[1.45rem]",
+  lg: "text-3xl",
 } as const;
 
-export function GillyLogo({
-  size = "md",
-  href = "/",
-  className,
-  hideCaption,
-  tone = "default",
-}: LogoProps) {
+export function GillyLogo({ size = "md", href = "/", className, tone = "default" }: LogoProps) {
+  const wordColor = tone === "light" ? "text-white" : "text-gilly";
+  const restColor = tone === "light" ? "text-white/80" : "text-ink";
+
   const content = (
     <span className={`group/logo flex shrink-0 items-center gap-2.5 ${className ?? ""}`}>
       <Image
         src={logo}
-        alt="Gilly Brinquedos"
+        alt=""
         width={MARK_SIZE[size]}
         height={MARK_SIZE[size]}
         priority
         className="rounded-full shadow-[0_2px_6px_rgba(105,62,20,0.25)] transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-105"
       />
-      {!hideCaption && (
-        <span
-          className={`hidden font-semibold uppercase tracking-[0.16em] sm:inline ${CAPTION_SIZE[size]} ${
-            tone === "light" ? "text-white/60" : "text-ink-soft"
-          }`}
-        >
-          Loja de brinquedos
-        </span>
-      )}
+      <span className={`font-display font-extrabold leading-none ${WORD_SIZE[size]}`}>
+        <span className={wordColor}>Gilly</span>
+        <span className={restColor}>brinquedos</span>
+      </span>
     </span>
   );
 
   if (!href) return content;
 
   return (
-    <Link href={href} aria-label="Gilly Brinquedos — página inicial">
+    <Link href={href} aria-label="Ir para a página inicial da Gilly Brinquedos">
       {content}
     </Link>
   );

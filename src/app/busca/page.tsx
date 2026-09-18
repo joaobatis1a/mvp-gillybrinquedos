@@ -71,7 +71,7 @@ async function SearchResults({ searchParams }: Props) {
               Não achei nada com esse nome
             </p>
             <p className="max-w-md text-ink-soft">
-              Tenta escrever de outro jeito, ou dá uma olhada por categoria — costuma ser mais fácil
+              Tenta escrever de outro jeito, ou dá uma olhada por categoria: costuma ser mais fácil
               de achar.
             </p>
             <div className="mt-2 flex flex-wrap justify-center gap-2">

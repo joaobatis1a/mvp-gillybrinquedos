@@ -2,14 +2,17 @@ import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import { Reveal } from "@/components/effects/reveal";
 import { PinIcon, ClockIcon, WhatsAppIcon, InstagramIcon, ArrowRightIcon } from "@/components/icons";
 
+const MAPS_QUERY = encodeURIComponent(
+  "Rodovia PE-15, Km 16,5, Nº 242, Centro, Paulista, PE",
+);
+
 export function StoreCard() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
       <Reveal variant="zoom">
-        <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-border bg-cream-deep p-8 shadow-[var(--shadow-soft)] sm:p-12">
-
-          <div className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
-            <div>
+        <div className="overflow-hidden rounded-[2.5rem] border-2 border-border bg-cream-deep shadow-[var(--shadow-soft)]">
+          <div className="grid items-stretch lg:grid-cols-[1.15fr_1fr]">
+            <div className="p-8 sm:p-12">
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gilly">
                 Passa lá na loja
               </p>
@@ -17,8 +20,8 @@ export function StoreCard() {
                 A gente existe de verdade, com prateleira, balcão e tudo
               </h2>
               <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
-                Se você mora perto, vale a visita — dá pra pegar na mão, ver o tamanho real e a gente
-                ainda embrulha pra presente. Se não der, mandamos pra sua casa.
+                Se você mora perto, vale a visita: dá pra pegar na mão, ver o tamanho real e a gente
+                ainda embrulha pra presente. Se não der, a gente manda pra sua casa.
               </p>
 
               <div className="mt-7 grid gap-4 sm:grid-cols-2">
@@ -31,7 +34,7 @@ export function StoreCard() {
                     <p className="text-sm text-ink-soft">
                       Rodovia PE-15, Km 16,5, nº 242
                       <br />
-                      Centro, Paulista — PE
+                      Centro, Paulista, PE
                     </p>
                   </div>
                 </div>
@@ -73,9 +76,26 @@ export function StoreCard() {
               </div>
             </div>
 
-            <div className="relative flex justify-center">
-              <div className="absolute inset-10 rounded-full bg-white" />
-              <GillyMascot mood="love" size={260} className="relative" />
+            <div className="relative min-h-[280px] border-t-2 border-border lg:min-h-full lg:border-l-2 lg:border-t-0">
+              <iframe
+                title="Localização da Gilly Brinquedos no mapa"
+                src={`https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full grayscale-[15%]"
+                style={{ border: 0 }}
+              />
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`}
+                target="_blank"
+                rel="noreferrer"
+                className="squish absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[var(--shadow-soft)] backdrop-blur-sm sm:right-auto"
+              >
+                <span className="flex items-center gap-2 text-sm font-extrabold text-ink">
+                  <GillyMascot mood="love" size={32} />
+                  Ver rota no mapa
+                </span>
+                <ArrowRightIcon size={16} className="text-gilly" />
+              </a>
             </div>
           </div>
         </div>
