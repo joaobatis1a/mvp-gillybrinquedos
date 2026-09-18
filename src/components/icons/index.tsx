@@ -95,6 +95,14 @@ export const TruckIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const HomeIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M4 11.2 12 4l8 7.2" />
+    <path d="M6 9.6V20h12V9.6" />
+    <path d="M10 20v-6h4v6" />
+  </Icon>
+);
+
 export const StoreIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M4 10.2V20h16v-9.8" />

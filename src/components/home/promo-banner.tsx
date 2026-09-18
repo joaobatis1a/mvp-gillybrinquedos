@@ -48,14 +48,28 @@ export function PromoBanner() {
           className="relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-center text-white sm:px-12 sm:py-16"
           style={{
             backgroundImage:
-              "linear-gradient(115deg, var(--color-gilly-dark) 0%, var(--color-gilly) 45%, #FF7A2E 75%, var(--color-gilly) 100%)",
+              "linear-gradient(135deg, #2B2018 0%, #5A2E12 45%, #8F3400 80%, #C94A02 100%)",
             backgroundSize: "220% 220%",
-            animation: "gradient-pan 10s ease-in-out infinite",
+            animation: "gradient-pan 12s ease-in-out infinite",
           }}
         >
+          {/* brilhos de destaque nos cantos */}
+          <div
+            aria-hidden
+            className="animate-glow pointer-events-none absolute -left-16 -top-20 h-72 w-72 rounded-full blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(255,197,61,0.35) 0%, transparent 72%)" }}
+          />
+          <div
+            aria-hidden
+            className="animate-glow pointer-events-none absolute -bottom-24 -right-10 h-80 w-80 rounded-full blur-3xl"
+            style={{
+              animationDelay: "3s",
+              background: "radial-gradient(circle, rgba(242,96,10,0.5) 0%, transparent 74%)",
+            }}
+          />
           {/* listras diagonais */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.16]"
+            className="pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage:
                 "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",
@@ -67,7 +81,7 @@ export function PromoBanner() {
           {CORNER_TOYS.map((toy) => (
             <span
               key={toy.src}
-              className={`animate-float absolute hidden overflow-hidden rounded-2xl border-2 border-white/70 bg-white shadow-[0_12px_18px_rgba(0,0,0,0.25)] lg:block ${toy.className}`}
+              className={`animate-float absolute hidden lg:block ${toy.className}`}
               style={{
                 width: toy.size,
                 height: toy.size,
@@ -75,7 +89,13 @@ export function PromoBanner() {
                 transform: `rotate(${toy.tilt})`,
               }}
             >
-              <Image src={toy.src} alt="" fill sizes={`${toy.size}px`} className="object-cover" />
+              <Image
+                src={toy.src}
+                alt=""
+                fill
+                sizes={`${toy.size}px`}
+                className="object-contain mix-blend-multiply"
+              />
             </span>
           ))}
 

@@ -1,17 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import {
   ArrowRightIcon,
   StoreIcon,
   TruckIcon,
   CardIcon,
-  PinIcon,
   SparkleIcon,
   WhatsAppBadgeIcon,
 } from "@/components/icons";
+
+const CLOUD_PATH =
+  "M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z";
+
+/** Etiqueta com formato de nuvem, no mesmo estilo do resto do céu do site. */
+function CloudLabel({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center px-5 py-4 ${className ?? ""}`}>
+      <svg
+        viewBox="0 0 120 72"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full drop-shadow-[var(--shadow-soft)]"
+        aria-hidden
+      >
+        <path d={CLOUD_PATH} fill="#fff" stroke="#F0E0CD" strokeWidth="2.2" strokeLinejoin="round" />
+      </svg>
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
 
 export function Hero() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -42,12 +61,7 @@ export function Hero() {
     <section className="relative overflow-hidden">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pb-16 lg:pt-16">
         <div className="relative z-10">
-          <span className="inline-flex animate-pop items-center gap-2 rounded-full border-2 border-gilly-light bg-white px-4 py-2 text-xs font-extrabold text-gilly shadow-sm">
-            <PinIcon size={15} />
-            Loja física em Paulista, PE, bem na beira da PE-15
-          </span>
-
-          <h1 className="mt-6 max-w-[15ch] text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] text-ink sm:text-[3.4rem] lg:text-6xl">
+          <h1 className="animate-pop max-w-[15ch] text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] text-ink sm:text-[3.4rem] lg:text-6xl">
             Brinquedo bom é o que a criança
             <span className="relative mx-2 inline-block">
               <span className="relative z-10 text-gilly">não larga</span>
@@ -173,27 +187,35 @@ export function Hero() {
 
           {/* etiqueta flutuante */}
           <div
-            className="animate-float absolute bottom-[8%] left-[4%] rounded-2xl border-2 border-border bg-white px-4 py-3 shadow-[var(--shadow-soft)]"
+            className="animate-float absolute bottom-[4%] left-[0%] w-[46%]"
             style={{ animationDelay: "0.9s" }}
           >
-            <p className="text-[0.62rem] font-extrabold uppercase tracking-widest text-ink-faint">
-              Oi, eu sou a Gilly
-            </p>
-            <p className="font-display text-sm font-extrabold text-ink">Te ajudo a escolher?</p>
+            <CloudLabel className="flex-col">
+              <p className="text-center text-[0.6rem] font-extrabold uppercase tracking-widest text-ink-faint">
+                Oi, eu sou a Gilly
+              </p>
+              <p className="text-center font-display text-sm font-extrabold text-ink">
+                Te ajudo a escolher?
+              </p>
+            </CloudLabel>
           </div>
 
           {/* etiqueta flutuante secundária */}
           <a
             href="https://wa.me/558198930095"
-            className="animate-float squish absolute right-[0%] top-[38%] flex items-center gap-2 rounded-2xl border-2 border-border bg-white px-3.5 py-2.5 shadow-[var(--shadow-soft)] transition-colors hover:border-mint"
+            className="animate-float squish absolute right-[-4%] top-[34%] block w-[42%]"
             style={{ animationDelay: "1.6s" }}
           >
-            <WhatsAppBadgeIcon size={30} className="shrink-0" />
-            <span className="font-display text-xs font-extrabold leading-tight text-ink">
-              Chama no
-              <br />
-              WhatsApp
-            </span>
+            <CloudLabel>
+              <span className="flex items-center gap-2">
+                <WhatsAppBadgeIcon size={26} className="shrink-0" />
+                <span className="font-display text-xs font-extrabold leading-tight text-ink">
+                  Chama no
+                  <br />
+                  WhatsApp
+                </span>
+              </span>
+            </CloudLabel>
           </a>
         </div>
       </div>
