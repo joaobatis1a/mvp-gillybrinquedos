@@ -1,13 +1,37 @@
 import Link from "next/link";
-import { ToyArt } from "@/components/toys/toy-art";
+import Image from "next/image";
 import { Reveal } from "@/components/effects/reveal";
 import { ArrowRightIcon, TagIcon, SparkleIcon } from "@/components/icons";
 
 const CORNER_TOYS = [
-  { art: "brick", className: "left-[6%] top-[14%]", size: 62, delay: "0s" },
-  { art: "ball", className: "left-[18%] bottom-[10%]", size: 50, delay: "0.9s" },
-  { art: "dough", className: "right-[8%] top-[10%]", size: 58, delay: "0.5s" },
-  { art: "boardgame", className: "right-[20%] bottom-[8%]", size: 54, delay: "1.4s" },
+  {
+    src: "https://m.media-amazon.com/images/I/511uNX5p+CL._AC_SX679_.jpg",
+    className: "left-[6%] top-[14%]",
+    size: 68,
+    delay: "0s",
+    tilt: "-10deg",
+  },
+  {
+    src: "https://http2.mlstatic.com/D_NQ_NP_802227-MLB52854556942_122022-O.webp",
+    className: "left-[16%] bottom-[10%]",
+    size: 56,
+    delay: "0.9s",
+    tilt: "7deg",
+  },
+  {
+    src: "https://m.media-amazon.com/images/I/71NZ4m2GbHL._AC_SX679_.jpg",
+    className: "right-[8%] top-[10%]",
+    size: 64,
+    delay: "0.5s",
+    tilt: "8deg",
+  },
+  {
+    src: "https://m.media-amazon.com/images/I/71yJ6Tu7+zL._AC_SX679_.jpg",
+    className: "right-[20%] bottom-[8%]",
+    size: 60,
+    delay: "1.4s",
+    tilt: "-6deg",
+  },
 ] as const;
 
 const SPARKLES = [
@@ -42,11 +66,16 @@ export function PromoBanner() {
 
           {CORNER_TOYS.map((toy) => (
             <span
-              key={toy.art}
-              className={`animate-float absolute hidden opacity-90 drop-shadow-[0_12px_18px_rgba(0,0,0,0.2)] lg:block ${toy.className}`}
-              style={{ animationDelay: toy.delay }}
+              key={toy.src}
+              className={`animate-float absolute hidden overflow-hidden rounded-2xl border-2 border-white/70 bg-white shadow-[0_12px_18px_rgba(0,0,0,0.25)] lg:block ${toy.className}`}
+              style={{
+                width: toy.size,
+                height: toy.size,
+                animationDelay: toy.delay,
+                transform: `rotate(${toy.tilt})`,
+              }}
             >
-              <ToyArt art={toy.art} size={toy.size} />
+              <Image src={toy.src} alt="" fill sizes={`${toy.size}px`} className="object-cover" />
             </span>
           ))}
 

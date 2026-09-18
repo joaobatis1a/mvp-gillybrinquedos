@@ -5,14 +5,14 @@ import Image from "next/image";
 import { ToyArt } from "@/components/toys/toy-art";
 import type { Category } from "@/lib/types";
 
-/** Anel e brilho no hover na cor de cada categoria, em vez de um laranja único pra tudo. */
-const ACCENT_RING: Record<Category["accent"], string> = {
-  candy: "group-hover:border-candy group-hover:shadow-[0_10px_24px_-8px_rgba(255,92,147,0.45)]",
-  sky: "group-hover:border-sky group-hover:shadow-[0_10px_24px_-8px_rgba(63,176,229,0.45)]",
-  gilly: "group-hover:border-gilly group-hover:shadow-[0_10px_24px_-8px_rgba(242,96,10,0.45)]",
-  sun: "group-hover:border-sun group-hover:shadow-[0_10px_24px_-8px_rgba(255,197,61,0.5)]",
-  mint: "group-hover:border-mint group-hover:shadow-[0_10px_24px_-8px_rgba(63,196,160,0.45)]",
-  grape: "group-hover:border-grape group-hover:shadow-[0_10px_24px_-8px_rgba(139,92,246,0.45)]",
+/** Brilho de fundo no hover na cor de cada categoria, em vez de um laranja único pra tudo. */
+const ACCENT_GLOW: Record<Category["accent"], string> = {
+  candy: "bg-candy",
+  sky: "bg-sky",
+  gilly: "bg-gilly",
+  sun: "bg-sun",
+  mint: "bg-mint",
+  grape: "bg-grape",
 };
 
 /**
@@ -29,25 +29,30 @@ export function CategoryThumb({ category, size = 84 }: { category: Category; siz
   const showPhoto = Boolean(category.image) && !errored;
 
   return (
-    <span
-      className={`relative flex shrink-0 -translate-y-0 items-center justify-center overflow-hidden rounded-full border-2 border-border bg-white transition-all duration-300 group-hover:-translate-y-1 ${ACCENT_RING[category.accent]}`}
-      style={{ width: size, height: size }}
-    >
-      {showPhoto ? (
-        <Image
-          src={category.image!}
-          alt=""
-          fill
-          sizes={`${size}px`}
-          quality={90}
-          onError={() => setErrored(true)}
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.12]"
-        />
-      ) : (
-        <span className="opacity-45 grayscale transition-transform duration-500 group-hover:scale-110">
-          <ToyArt art={category.art} size={Math.round(size * 0.56)} />
-        </span>
-      )}
+    <span className="relative inline-flex shrink-0" style={{ width: size, height: size }}>
+      <span
+        aria-hidden
+        className={`absolute inset-0 scale-75 rounded-full opacity-0 blur-md transition-all duration-500 group-hover:scale-125 group-hover:opacity-40 ${ACCENT_GLOW[category.accent]}`}
+      />
+      <span
+        className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-border bg-white transition-transform duration-300 group-hover:[animation:bobble_0.6s_ease-in-out]"
+      >
+        {showPhoto ? (
+          <Image
+            src={category.image!}
+            alt=""
+            fill
+            sizes={`${size}px`}
+            quality={90}
+            onError={() => setErrored(true)}
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.1]"
+          />
+        ) : (
+          <span className="opacity-45 grayscale transition-transform duration-500 group-hover:scale-110">
+            <ToyArt art={category.art} size={Math.round(size * 0.56)} />
+          </span>
+        )}
+      </span>
     </span>
   );
 }

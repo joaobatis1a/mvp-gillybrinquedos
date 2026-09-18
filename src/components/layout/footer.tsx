@@ -8,7 +8,7 @@ import {
   WhatsAppIcon,
   WhatsAppBadgeIcon,
   InstagramIcon,
-  PixBadgeIcon,
+  PixIcon,
   CardIcon,
   ShieldIcon,
   ArrowRightIcon,
@@ -164,7 +164,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4 text-xs font-semibold text-white/60">
             <span className="flex items-center gap-1.5">
-              <PixBadgeIcon size={16} />
+              <PixIcon size={16} />
               Pix
             </span>
             <span className="flex items-center gap-1.5">

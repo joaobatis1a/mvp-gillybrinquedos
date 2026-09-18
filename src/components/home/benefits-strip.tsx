@@ -1,4 +1,4 @@
-import { StoreIcon, PixBadgeIcon, WhatsAppBadgeIcon } from "@/components/icons";
+import { StoreIcon, PixIcon, WhatsAppIcon } from "@/components/icons";
 import { Reveal } from "@/components/effects/reveal";
 
 const BENEFITS = [
@@ -15,12 +15,14 @@ const BENEFITS = [
     badgeTone: "bg-sky-deep",
   },
   {
-    Icon: PixBadgeIcon,
+    Icon: PixIcon,
+    iconTone: "text-mint",
     title: "Pix aprova na hora",
     text: "Pagou, já separamos o pedido.",
   },
   {
-    Icon: WhatsAppBadgeIcon,
+    Icon: WhatsAppIcon,
+    iconTone: "text-mint",
     title: "Dúvida de presente?",
     text: "Chama no WhatsApp que a gente ajuda a escolher.",
   },

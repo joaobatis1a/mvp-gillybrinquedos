@@ -272,7 +272,7 @@ export function FilteredProducts({ products }: { products: Product[] }) {
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
             aria-label="Fechar filtros"
-            className="absolute inset-0 bg-ink/45 backdrop-blur-sm"
+            className="absolute inset-0 bg-ink/45"
             onClick={() => setDrawerOpen(false)}
           />
           <div className="absolute inset-y-0 right-0 flex w-[88%] max-w-sm animate-pop flex-col bg-cream shadow-2xl">
