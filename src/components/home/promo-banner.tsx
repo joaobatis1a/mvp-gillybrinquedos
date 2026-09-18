@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ToyArt } from "@/components/toys/toy-art";
 import { Reveal } from "@/components/effects/reveal";
-import { ArrowRightIcon, TagIcon } from "@/components/icons";
+import { ArrowRightIcon, TagIcon, SparkleIcon } from "@/components/icons";
 
 const CORNER_TOYS = [
   { art: "brick", className: "left-[6%] top-[14%]", size: 62, delay: "0s" },
@@ -10,11 +10,25 @@ const CORNER_TOYS = [
   { art: "boardgame", className: "right-[20%] bottom-[8%]", size: 54, delay: "1.4s" },
 ] as const;
 
+const SPARKLES = [
+  { className: "left-[30%] top-[18%]", size: 16, delay: "0s" },
+  { className: "right-[28%] top-[26%]", size: 12, delay: "1.1s" },
+  { className: "right-[36%] bottom-[22%]", size: 14, delay: "2s" },
+] as const;
+
 export function PromoBanner() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <Reveal variant="zoom">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gilly px-6 py-12 text-center text-white sm:px-12 sm:py-16">
+        <div
+          className="relative overflow-hidden rounded-[2.5rem] px-6 py-12 text-center text-white sm:px-12 sm:py-16"
+          style={{
+            backgroundImage:
+              "linear-gradient(115deg, var(--color-gilly-dark) 0%, var(--color-gilly) 45%, #FF7A2E 75%, var(--color-gilly) 100%)",
+            backgroundSize: "220% 220%",
+            animation: "gradient-pan 10s ease-in-out infinite",
+          }}
+        >
           {/* listras diagonais */}
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.16]"
@@ -23,6 +37,9 @@ export function PromoBanner() {
                 "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",
             }}
           />
+          {/* brilho automático passando pelo banner inteiro */}
+          <div className="shine-loop pointer-events-none absolute inset-0" />
+
           {CORNER_TOYS.map((toy) => (
             <span
               key={toy.art}
@@ -33,8 +50,18 @@ export function PromoBanner() {
             </span>
           ))}
 
+          {SPARKLES.map((sparkle, index) => (
+            <span
+              key={index}
+              className={`animate-sparkle pointer-events-none absolute hidden text-white/80 sm:block ${sparkle.className}`}
+              style={{ animationDelay: sparkle.delay }}
+            >
+              <SparkleIcon size={sparkle.size} />
+            </span>
+          ))}
+
           <div className="relative mx-auto max-w-xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.18em] backdrop-blur">
+            <span className="animate-pulse-ring inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.18em] backdrop-blur">
               <TagIcon size={15} />
               Semana de ofertas
             </span>

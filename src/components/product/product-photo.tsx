@@ -30,7 +30,7 @@ export function ProductPhoto({
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden bg-[#F7F5F2] ${className ?? ""}`}
+      className={`relative flex items-center justify-center overflow-hidden bg-white ${className ?? ""}`}
     >
       {showPhoto ? (
         <Image

@@ -4,7 +4,15 @@ import Link from "next/link";
 import { useRef } from "react";
 import { GillyMascot } from "@/components/mascot/gilly-mascot";
 import { ToyArt, type ToyArtKey } from "@/components/toys/toy-art";
-import { ArrowRightIcon, StoreIcon, TruckIcon, CardIcon, PinIcon } from "@/components/icons";
+import {
+  ArrowRightIcon,
+  StoreIcon,
+  TruckIcon,
+  CardIcon,
+  PinIcon,
+  SparkleIcon,
+  WhatsAppIcon,
+} from "@/components/icons";
 
 type Floater = {
   art: ToyArtKey;
@@ -133,6 +141,34 @@ export function Hero() {
           <div className="absolute inset-[10%] rounded-full bg-gilly-tint" />
           <div className="absolute inset-[19%] rounded-full border border-gilly-light" />
 
+          {/* anel pontilhado girando devagar, dá vida ao palco sem poluir */}
+          <svg viewBox="0 0 100 100" className="animate-spin-slow absolute inset-[13%] text-gilly-light">
+            <circle
+              cx="50"
+              cy="50"
+              r="48"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeDasharray="1 7"
+              strokeLinecap="round"
+            />
+          </svg>
+
+          {/* faíscas discretas perto da mascote */}
+          <span
+            className="animate-sparkle absolute right-[16%] top-[8%] text-sun"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <SparkleIcon size={20} />
+          </span>
+          <span
+            className="animate-sparkle absolute left-[10%] top-[30%] text-candy"
+            style={{ animationDelay: "1.6s" }}
+          >
+            <SparkleIcon size={13} />
+          </span>
+
           {FLOATERS.map((floater) => (
             <span
               key={floater.art}
@@ -168,6 +204,22 @@ export function Hero() {
             </p>
             <p className="font-display text-sm font-extrabold text-ink">Te ajudo a escolher?</p>
           </div>
+
+          {/* etiqueta flutuante secundária */}
+          <a
+            href="https://wa.me/558198930095"
+            className="animate-float squish absolute right-[0%] top-[38%] flex items-center gap-2 rounded-2xl border-2 border-border bg-white px-3.5 py-2.5 shadow-[var(--shadow-soft)] transition-colors hover:border-mint"
+            style={{ animationDelay: "1.6s" }}
+          >
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mint/15 text-mint">
+              <WhatsAppIcon size={16} />
+            </span>
+            <span className="font-display text-xs font-extrabold leading-tight text-ink">
+              Chama no
+              <br />
+              WhatsApp
+            </span>
+          </a>
         </div>
       </div>
 

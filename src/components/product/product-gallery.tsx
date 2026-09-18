@@ -22,7 +22,7 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-border bg-[#F7F5F2]">
+      <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-border bg-white">
         {showPhoto ? (
           <Image
             key={current}
@@ -49,7 +49,7 @@ export function ProductGallery({
               onClick={() => setActive(index)}
               aria-label={`Ver foto ${index + 1}`}
               aria-current={active === index}
-              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-[#F7F5F2] transition-colors ${
+              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-colors ${
                 active === index ? "border-gilly" : "border-border hover:border-border-strong"
               }`}
             >
