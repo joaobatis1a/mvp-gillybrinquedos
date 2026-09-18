@@ -48,9 +48,11 @@ export function Footer() {
           </div>
           <a
             href="https://wa.me/558198930095"
-            className="shine squish group inline-flex shrink-0 items-center gap-2 rounded-full bg-mint px-6 py-3.5 font-extrabold text-ink transition-colors hover:brightness-95"
+            className="shine squish group inline-flex shrink-0 items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-ink shadow-[0_14px_26px_-10px_rgba(63,196,160,0.6)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-10px_rgba(63,196,160,0.7)]"
           >
-            <WhatsAppIcon size={19} />
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/35">
+              <WhatsAppIcon size={18} />
+            </span>
             Chamar no WhatsApp
             <ArrowRightIcon
               size={17}
