@@ -62,7 +62,7 @@ export function PromoBanner() {
             </p>
             <Link
               href="/busca?q=promo"
-              className="shine squish group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-gilly-dark transition-transform hover:scale-[1.03]"
+              className="squish group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-gilly-dark transition-transform hover:scale-[1.03]"
             >
               Ver o que está em oferta
               <ArrowRightIcon

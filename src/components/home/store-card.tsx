@@ -69,7 +69,7 @@ export function StoreCard() {
               <div className="relative mt-8 flex flex-wrap gap-3">
                 <a
                   href="https://wa.me/558198930095"
-                  className="shine squish group inline-flex items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(63,196,160,0.85)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-12px_rgba(63,196,160,0.95)]"
+                  className="squish group inline-flex items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(63,196,160,0.85)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-12px_rgba(63,196,160,0.95)]"
                 >
                   <WhatsAppBadgeIcon size={30} className="shrink-0" />
                   Chamar no WhatsApp

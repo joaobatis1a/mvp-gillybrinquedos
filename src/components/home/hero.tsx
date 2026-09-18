@@ -15,19 +15,14 @@ import {
 const CLOUD_PATH =
   "M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z";
 
-/** Etiqueta com formato de nuvem, no mesmo estilo do resto do céu do site. */
+/** Etiqueta com formato de nuvem, no mesmo desenho (gordinho) das nuvens decorativas ao redor. */
 function CloudLabel({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`relative flex items-center justify-center px-5 py-4 ${className ?? ""}`}>
-      <svg
-        viewBox="0 0 120 72"
-        preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full text-white"
-        aria-hidden
-      >
+    <div className={`relative flex aspect-[5/3] items-center justify-center px-6 ${className ?? ""}`}>
+      <svg viewBox="0 0 120 72" className="absolute inset-0 h-full w-full text-white" aria-hidden>
         <path d={CLOUD_PATH} fill="currentColor" />
       </svg>
-      <div className="relative">{children}</div>
+      <div className="relative pb-2">{children}</div>
     </div>
   );
 }
@@ -92,7 +87,7 @@ export function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/categorias"
-              className="shine squish group inline-flex items-center gap-2 rounded-full bg-gilly px-7 py-4 font-extrabold text-white shadow-[0_12px_28px_-12px_rgba(242,96,10,0.9)] transition-colors hover:bg-gilly-dark"
+              className="squish group inline-flex items-center gap-2 rounded-full bg-gilly px-7 py-4 font-extrabold text-white shadow-[0_12px_28px_-12px_rgba(242,96,10,0.9)] transition-colors hover:bg-gilly-dark"
             >
               Ver a loja inteira
               <ArrowRightIcon
@@ -187,7 +182,7 @@ export function Hero() {
 
           {/* etiqueta flutuante */}
           <div
-            className="animate-float absolute bottom-[4%] left-[0%] w-[46%]"
+            className="animate-float absolute bottom-[0%] left-[-4%] w-[58%]"
             style={{ animationDelay: "0.9s" }}
           >
             <CloudLabel className="flex-col">
@@ -203,7 +198,7 @@ export function Hero() {
           {/* etiqueta flutuante secundária */}
           <a
             href="https://wa.me/558198930095"
-            className="animate-float squish absolute right-[-4%] top-[34%] block w-[42%]"
+            className="animate-float squish absolute right-[-8%] top-[30%] block w-[52%]"
             style={{ animationDelay: "1.6s" }}
           >
             <CloudLabel>
@@ -219,19 +214,6 @@ export function Hero() {
           </a>
         </div>
       </div>
-
-      {/* onda de transição */}
-      <svg
-        className="block w-full text-white/70"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-        aria-hidden
-      >
-        <path
-          fill="currentColor"
-          d="M0 34c180 34 360 44 540 24s360-52 540-30 240 40 360 34v12H0z"
-        />
-      </svg>
     </section>
   );
 }

@@ -47,7 +47,7 @@ export function TiltCard({ children, className, strength = 7 }: TiltCardProps) {
       ref={sceneRef}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className={`tilt-scene ${className ?? ""}`}
+      className={`tilt-scene h-full ${className ?? ""}`}
     >
       {children}
     </div>

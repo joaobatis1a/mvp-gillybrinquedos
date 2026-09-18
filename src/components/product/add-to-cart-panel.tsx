@@ -51,7 +51,7 @@ export function AddToCartPanel({ product }: { product: Product }) {
       <div className="flex flex-col gap-2.5 sm:flex-row">
         <button
           onClick={handleBuyNow}
-          className="shine squish flex flex-1 items-center justify-center gap-2 rounded-full bg-gilly px-6 py-4 font-extrabold text-white shadow-[0_12px_26px_-14px_rgba(242,96,10,0.95)] transition-colors hover:bg-gilly-dark"
+          className="squish flex flex-1 items-center justify-center gap-2 rounded-full bg-gilly px-6 py-4 font-extrabold text-white shadow-[0_12px_26px_-14px_rgba(242,96,10,0.95)] transition-colors hover:bg-gilly-dark"
         >
           Comprar agora
         </button>
