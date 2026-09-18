@@ -35,9 +35,6 @@ export function PromoBanner() {
                 "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",
             }}
           />
-          {/* brilho automático passando pelo banner inteiro */}
-          <div className="shine-loop pointer-events-none absolute inset-0" />
-
           {SPARKLES.map((sparkle, index) => (
             <span
               key={index}

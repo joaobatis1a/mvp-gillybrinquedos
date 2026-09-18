@@ -167,11 +167,6 @@ body {
   50% { opacity: 0.9; transform: scale(1.12); }
 }
 
-@keyframes shimmer {
-  from { transform: translateX(-120%) skewX(-18deg); }
-  to { transform: translateX(240%) skewX(-18deg); }
-}
-
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -212,12 +207,6 @@ body {
   to { stroke-dashoffset: -220; }
 }
 
-@keyframes shimmer-loop {
-  0% { transform: translateX(-120%) skewX(-18deg); }
-  22% { transform: translateX(240%) skewX(-18deg); }
-  100% { transform: translateX(240%) skewX(-18deg); }
-}
-
 @keyframes pulse-ring {
   0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55); }
   70% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
@@ -252,21 +241,6 @@ body {
   background-image: linear-gradient(135deg, #2b2018 0%, #5a2e12 45%, #8f3400 80%, #c94a02 100%);
   background-size: 220% 220%;
   animation: gradient-pan 12s ease-in-out infinite;
-}
-
-/* sweep de brilho automático (sem precisar de hover) */
-.shine-loop { position: relative; overflow: hidden; isolation: isolate; }
-.shine-loop::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 32%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  transform: translateX(-120%) skewX(-18deg);
-  animation: shimmer-loop 4.5s ease-in-out infinite;
-  pointer-events: none;
 }
 
 .marquee-track {
@@ -305,37 +279,6 @@ body {
 .tilt-scene:hover .tilt-card { transition-duration: 0.12s; }
 .tilt-layer { transform: translateZ(var(--layer-z, 30px)); }
 
-/* pointer-follow glare */
-.glare::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    380px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
-    rgba(255, 255, 255, 0.55),
-    transparent 62%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-.glare:hover::after { opacity: 1; }
-
-/* shine sweep on buttons */
-.shine { position: relative; overflow: hidden; isolation: isolate; }
-.shine::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-  transform: translateX(-120%) skewX(-18deg);
-  pointer-events: none;
-}
-.shine:hover::before { animation: shimmer 0.85s ease-out; }
 
 /* squish feedback */
 .squish { transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1); }
