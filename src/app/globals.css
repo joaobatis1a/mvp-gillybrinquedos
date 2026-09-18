@@ -224,6 +224,11 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
 
+@keyframes stripe-pan {
+  from { background-position: 0 0; }
+  to { background-position: 92px 0; }
+}
+
 /* ---------- animation utilities ---------- */
 
 .animate-float { animation: float-y 5.5s ease-in-out infinite; }
@@ -237,6 +242,7 @@ body {
 .animate-blink { animation: blink 5.5s ease-in-out infinite; transform-origin: center; }
 .animate-sparkle { animation: sparkle-twinkle 2.4s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
+.animate-stripes { animation: stripe-pan 3s linear infinite; }
 
 /* fundo escuro com gradiente quente — usado no banner de ofertas e no rodapé */
 .promo-surface {

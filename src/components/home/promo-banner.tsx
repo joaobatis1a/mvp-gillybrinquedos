@@ -27,9 +27,9 @@ export function PromoBanner() {
               background: "radial-gradient(circle, rgba(242,96,10,0.5) 0%, transparent 74%)",
             }}
           />
-          {/* listras diagonais */}
+          {/* listras diagonais correndo devagar */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.08]"
+            className="animate-stripes pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage:
                 "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",

@@ -182,7 +182,7 @@ export function Hero() {
 
           {/* etiqueta flutuante */}
           <div
-            className="animate-float absolute bottom-[0%] left-[-4%] w-[58%]"
+            className="animate-float absolute bottom-[1%] left-[-2%] w-[52%]"
             style={{ animationDelay: "0.9s" }}
           >
             <CloudLabel className="flex-col">
@@ -198,7 +198,7 @@ export function Hero() {
           {/* etiqueta flutuante secundária */}
           <a
             href="https://wa.me/558198930095"
-            className="animate-float squish absolute right-[-8%] top-[30%] block w-[52%]"
+            className="animate-float squish absolute right-[-6%] top-[31%] block w-[46%]"
             style={{ animationDelay: "1.6s" }}
           >
             <CloudLabel>

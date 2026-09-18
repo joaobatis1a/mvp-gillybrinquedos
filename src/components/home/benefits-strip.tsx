@@ -57,15 +57,23 @@ function BenefitCard({ benefit, index }: { benefit: (typeof BENEFITS)[number]; i
 
 export function BenefitsStrip() {
   return (
-    <section className="overflow-hidden py-10">
-      <div className="marquee-track gap-4 [animation-duration:26s]">
-        {[0, 1].map((copy) => (
-          <div key={copy} className="flex shrink-0 gap-4 pl-4" aria-hidden={copy === 1}>
-            {BENEFITS.map((benefit, index) => (
-              <BenefitCard key={`${copy}-${benefit.title}`} benefit={benefit} index={index} />
-            ))}
-          </div>
-        ))}
+    <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div
+        className="relative overflow-hidden rounded-[2.5rem] border-y-4 border-dashed border-white/70 py-8"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, var(--color-candy-light) 0%, var(--color-sky-light) 34%, var(--color-mint-light) 67%, var(--color-sun-light) 100%)",
+        }}
+      >
+        <div className="flex w-max gap-4" style={{ animation: "marquee 26s linear infinite" }}>
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 gap-4 pl-4" aria-hidden={copy === 1}>
+              {BENEFITS.map((benefit, index) => (
+                <BenefitCard key={`${copy}-${benefit.title}`} benefit={benefit} index={index} />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
