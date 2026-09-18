@@ -6,10 +6,13 @@ import { ToyArt } from "@/components/toys/toy-art";
 import type { Category } from "@/lib/types";
 
 /**
- * Miniatura circular de categoria com foto real. Usa object-cover com um
- * leve zoom pra recortar a margem branca que as fotos de produto trazem
- * de fábrica — sem isso, via de regra sobra "foto quadrada" no meio do
- * círculo em vez do brinquedo preenchendo o espaço.
+ * Miniatura circular de categoria com foto real. Usa object-cover puro
+ * (sem zoom artificial) porque as fotos vêm em proporções bem diferentes
+ * (quadradas, retrato bem alto etc.) — um zoom fixo cortava justo a parte
+ * que identifica o brinquedo (logo, rosto) em várias delas. object-cover
+ * simples já resolve a "foto quadrada" sobrando dentro do círculo, e
+ * object-position no topo evita cortar a parte de cima da embalagem,
+ * que costuma ter o personagem ou a marca.
  */
 export function CategoryThumb({ category, size = 84 }: { category: Category; size?: number }) {
   const [errored, setErrored] = useState(false);
@@ -28,7 +31,7 @@ export function CategoryThumb({ category, size = 84 }: { category: Category; siz
           sizes={`${size}px`}
           quality={90}
           onError={() => setErrored(true)}
-          className="scale-[1.3] object-cover transition-transform duration-500 group-hover:scale-[1.42]"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.08]"
         />
       ) : (
         <span className="opacity-45 grayscale transition-transform duration-500 group-hover:scale-110">
