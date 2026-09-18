@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { GillyMascot } from "@/components/mascot/gilly-mascot";
-import { ToyArt, type ToyArtKey } from "@/components/toys/toy-art";
 import {
   ArrowRightIcon,
   StoreIcon,
@@ -13,24 +12,6 @@ import {
   SparkleIcon,
   WhatsAppIcon,
 } from "@/components/icons";
-
-type Floater = {
-  art: ToyArtKey;
-  className: string;
-  size: number;
-  depth: number;
-  delay: string;
-  tilt: string;
-};
-
-const FLOATERS: Floater[] = [
-  { art: "brick", className: "left-[2%] top-[12%]", size: 74, depth: 26, delay: "0s", tilt: "-8deg" },
-  { art: "racecar", className: "right-[4%] top-[6%]", size: 86, depth: 18, delay: "0.7s", tilt: "6deg" },
-  { art: "plush", className: "left-[6%] bottom-[14%]", size: 80, depth: 32, delay: "1.4s", tilt: "5deg" },
-  { art: "dino", className: "right-[0%] bottom-[20%]", size: 78, depth: 22, delay: "0.4s", tilt: "-6deg" },
-  { art: "capsule", className: "right-[24%] bottom-[2%]", size: 58, depth: 38, delay: "1.1s", tilt: "9deg" },
-  { art: "guitar", className: "left-[26%] top-[0%]", size: 62, depth: 14, delay: "1.8s", tilt: "-10deg" },
-];
 
 export function Hero() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -168,21 +149,6 @@ export function Hero() {
           >
             <SparkleIcon size={13} />
           </span>
-
-          {FLOATERS.map((floater) => (
-            <span
-              key={floater.art}
-              className={`animate-float-sm absolute drop-shadow-[0_14px_20px_rgba(105,62,20,0.2)] ${floater.className}`}
-              style={{
-                animationDelay: floater.delay,
-                ["--tilt" as string]: floater.tilt,
-                transform: `translate3d(calc(var(--mx) * ${floater.depth}px), calc(var(--my) * ${floater.depth}px), 0)`,
-                transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)",
-              }}
-            >
-              <ToyArt art={floater.art} size={floater.size} />
-            </span>
-          ))}
 
           <div
             className="absolute inset-0 flex items-center justify-center"
