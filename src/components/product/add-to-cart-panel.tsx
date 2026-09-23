@@ -51,16 +51,16 @@ export function AddToCartPanel({ product }: { product: Product }) {
       <div className="flex flex-col gap-2.5 sm:flex-row">
         <button
           onClick={handleBuyNow}
-          className="squish flex flex-1 items-center justify-center gap-2 rounded-full bg-gilly px-6 py-4 font-extrabold text-white shadow-[0_12px_26px_-14px_rgba(242,96,10,0.95)] transition-colors hover:bg-gilly-dark"
+          className="squish flex flex-1 items-center justify-center gap-2 rounded-full bg-gilly px-6 py-4 font-extrabold text-white shadow-[0_12px_26px_-14px_rgba(242,96,10,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_-14px_rgba(242,96,10,1)]"
         >
           Comprar agora
         </button>
         <button
           onClick={handleAdd}
-          className={`squish flex flex-1 items-center justify-center gap-2 rounded-full border-2 px-6 py-4 font-extrabold transition-colors ${
+          className={`squish group flex flex-1 items-center justify-center gap-2 rounded-full border-2 px-6 py-4 font-extrabold transition-all duration-200 ${
             justAdded
               ? "border-success bg-success text-white"
-              : "border-gilly text-gilly hover:bg-gilly-tint"
+              : "border-gilly text-gilly hover:-translate-y-0.5 hover:bg-gilly-tint hover:shadow-[0_10px_20px_-12px_rgba(242,96,10,0.55)]"
           }`}
         >
           {justAdded ? (
@@ -70,7 +70,7 @@ export function AddToCartPanel({ product }: { product: Product }) {
             </>
           ) : (
             <>
-              <CartIcon size={19} />
+              <CartIcon size={19} className="transition-transform duration-200 group-hover:-rotate-12 group-hover:scale-110" />
               Pôr no carrinho
             </>
           )}

@@ -79,16 +79,20 @@ export default async function ProductPage({ params }: Props) {
 
           <div className="mt-4 grid grid-cols-3 gap-3">
             {[
-              { Icon: StoreIcon, label: "Retire na loja", note: "Grátis em Paulista" },
-              { Icon: TruckIcon, label: "Entrega", note: "Grande Recife" },
-              { Icon: ShieldIcon, label: "Garantia", note: "7 dias pra trocar" },
-            ].map(({ Icon, label, note }) => (
+              { Icon: StoreIcon, label: "Retire na loja", note: "Grátis em Paulista", tone: "bg-gilly", tint: "bg-gilly-tint" },
+              { Icon: TruckIcon, label: "Entrega rápida", note: "Grande Recife", tone: "bg-sky-deep", tint: "bg-sky-light" },
+              { Icon: ShieldIcon, label: "Garantia real", note: "7 dias pra trocar", tone: "bg-mint", tint: "bg-mint-light" },
+            ].map(({ Icon, label, note, tone, tint }) => (
               <div
                 key={label}
-                className="rounded-2xl border-2 border-border bg-white/80 p-3 text-center"
+                className={`group flex flex-col items-center gap-1.5 rounded-2xl border-2 border-white p-3.5 text-center shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 ${tint}`}
               >
-                <Icon size={20} className="mx-auto text-gilly" />
-                <p className="mt-1.5 text-xs font-extrabold text-ink">{label}</p>
+                <span
+                  className={`flex h-10 w-10 items-center justify-center rounded-full text-white shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 ${tone}`}
+                >
+                  <Icon size={19} />
+                </span>
+                <p className="text-xs font-extrabold text-ink">{label}</p>
                 <p className="text-[0.7rem] text-ink-soft">{note}</p>
               </div>
             ))}
@@ -152,20 +156,24 @@ export default async function ProductPage({ params }: Props) {
 
             <p className="mt-6 leading-relaxed text-ink-soft">{product.description}</p>
 
-            <div className="mt-5 rounded-[1.5rem] bg-cream-deep/70 p-5">
-              <p className="font-display text-sm font-extrabold uppercase tracking-[0.12em] text-ink">
-                O que vem
+            <div className="mt-5 rounded-[1.75rem] border-2 border-dashed border-gilly-light bg-gilly-tint/40 p-5">
+              <p className="flex items-center gap-2 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-gilly-deep">
+                <PackageIcon size={16} />
+                O que vem na caixa
               </p>
-              <ul className="mt-3 space-y-2">
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
                 {product.highlights.map((highlight) => (
-                  <li key={highlight} className="flex items-start gap-2.5 text-sm text-ink">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gilly text-white">
+                  <div
+                    key={highlight}
+                    className="flex items-center gap-2.5 rounded-xl bg-white/80 px-3 py-2.5 text-sm font-semibold text-ink shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
+                  >
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gilly text-white">
                       <CheckIcon size={12} strokeWidth={3} />
                     </span>
                     {highlight}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </Reveal>

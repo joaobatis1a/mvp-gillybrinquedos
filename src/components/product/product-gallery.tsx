@@ -32,7 +32,7 @@ export function ProductGallery({
             sizes="(min-width: 1024px) 46vw, 92vw"
             priority
             onError={() => setErrored((prev) => ({ ...prev, [active]: true }))}
-            className="object-contain p-8"
+            className="animate-pop object-contain p-8"
           />
         ) : (
           <span className="opacity-40 grayscale">
@@ -49,8 +49,10 @@ export function ProductGallery({
               onClick={() => setActive(index)}
               aria-label={`Ver foto ${index + 1}`}
               aria-current={active === index}
-              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-colors ${
-                active === index ? "border-gilly" : "border-border hover:border-border-strong"
+              className={`group relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_18px_-10px_rgba(105,62,20,0.4)] ${
+                active === index
+                  ? "border-gilly shadow-[0_0_0_3px_rgba(242,96,10,0.16)]"
+                  : "border-border hover:border-gilly-light"
               }`}
             >
               {!errored[index] ? (
@@ -60,7 +62,7 @@ export function ProductGallery({
                   fill
                   sizes="64px"
                   onError={() => setErrored((prev) => ({ ...prev, [index]: true }))}
-                  className="object-contain p-1.5"
+                  className="object-contain p-1.5 transition-transform duration-300 group-hover:scale-110"
                 />
               ) : (
                 <span className="flex h-full items-center justify-center opacity-40 grayscale">
