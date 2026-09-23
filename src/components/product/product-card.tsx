@@ -102,7 +102,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             className={`squish group/btn relative mt-3 flex w-full items-center justify-center gap-2 overflow-hidden rounded-full py-2.5 text-sm font-extrabold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
               added
                 ? "bg-success text-white"
-                : "bg-gilly text-white shadow-[0_8px_18px_-8px_rgba(242,96,10,0.85)] hover:bg-gilly-dark hover:shadow-[0_10px_22px_-8px_rgba(242,96,10,0.95)]"
+                : "bg-gilly text-white shadow-[0_8px_18px_-8px_rgba(242,96,10,0.85)] hover:-translate-y-0.5 hover:shadow-[0_14px_26px_-8px_rgba(242,96,10,0.95)]"
             }`}
           >
             {added ? (

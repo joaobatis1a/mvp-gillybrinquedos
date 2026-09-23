@@ -6,13 +6,13 @@ type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-gilly text-white hover:bg-gilly-dark shadow-sm shadow-gilly/20",
+    "bg-gilly text-white shadow-sm shadow-gilly/20 hover:-translate-y-0.5 hover:shadow-[0_12px_22px_-8px_rgba(242,96,10,0.65)]",
   secondary:
-    "bg-sky text-white hover:brightness-95",
+    "bg-sky text-white hover:-translate-y-0.5 hover:shadow-[0_12px_22px_-8px_rgba(63,176,229,0.55)]",
   outline:
     "border-2 border-gilly text-gilly hover:bg-gilly-light bg-transparent",
   ghost: "text-ink hover:bg-black/5 bg-transparent",
-  danger: "bg-danger text-white hover:brightness-95",
+  danger: "bg-danger text-white hover:-translate-y-0.5 hover:shadow-[0_12px_22px_-8px_rgba(225,75,60,0.55)]",
 };
 
 const sizeClasses: Record<Size, string> = {

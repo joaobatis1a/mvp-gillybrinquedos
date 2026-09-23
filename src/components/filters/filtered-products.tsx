@@ -258,7 +258,7 @@ export function FilteredProducts({ products }: { products: Product[] }) {
               </p>
               <button
                 onClick={clearAll}
-                className="squish mt-1 rounded-full bg-gilly px-6 py-2.5 text-sm font-extrabold text-white hover:bg-gilly-dark"
+                className="squish mt-1 rounded-full bg-gilly px-6 py-2.5 text-sm font-extrabold text-white shadow-sm shadow-gilly/20 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-8px_rgba(242,96,10,0.6)]"
               >
                 Limpar filtros
               </button>

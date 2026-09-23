@@ -82,7 +82,7 @@ export function AccountMenu() {
                 <Link
                   href="/conta/login"
                   onClick={() => setOpen(false)}
-                  className="squish block rounded-2xl bg-gilly px-3 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-gilly-dark"
+                  className="squish block rounded-2xl bg-gilly px-3 py-2.5 text-center text-sm font-bold text-white shadow-sm shadow-gilly/20 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-8px_rgba(242,96,10,0.6)]"
                 >
                   Entrar
                 </Link>

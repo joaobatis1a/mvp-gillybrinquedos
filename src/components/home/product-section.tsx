@@ -39,10 +39,12 @@ export function ProductSection({
           {href && (
             <Link
               href={href}
-              className="group inline-flex shrink-0 items-center gap-1.5 rounded-full border-2 border-border bg-white px-4 py-2.5 text-sm font-extrabold text-ink transition-colors hover:border-gilly hover:text-gilly-dark"
+              className="squish group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-gilly-tint py-2 pl-4 pr-2 text-sm font-extrabold text-gilly-deep transition-all duration-300 hover:-translate-y-0.5 hover:bg-gilly hover:text-white hover:shadow-[0_12px_24px_-12px_rgba(242,96,10,0.7)]"
             >
               {linkLabel}
-              <ArrowRightIcon size={17} className="transition-transform group-hover:translate-x-1" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-gilly transition-all duration-300 group-hover:translate-x-0.5 group-hover:bg-white/25 group-hover:text-white">
+                <ArrowRightIcon size={15} />
+              </span>
             </Link>
           )}
         </div>
