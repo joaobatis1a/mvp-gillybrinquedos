@@ -32,7 +32,7 @@ export function CategoryThumb({ category, size = 84 }: { category: Category; siz
     <span className="relative inline-flex shrink-0" style={{ width: size, height: size }}>
       <span
         aria-hidden
-        className={`absolute inset-0 scale-75 rounded-full opacity-0 blur-md transition-all duration-500 group-hover:scale-125 group-hover:opacity-40 ${ACCENT_GLOW[category.accent]}`}
+        className={`absolute inset-0 scale-75 rounded-full opacity-0 blur-md transition-all duration-500 group-hover:scale-110 group-hover:opacity-25 ${ACCENT_GLOW[category.accent]}`}
       />
       <span
         className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-border bg-white transition-transform duration-300 group-hover:[animation:bobble_0.6s_ease-in-out]"
