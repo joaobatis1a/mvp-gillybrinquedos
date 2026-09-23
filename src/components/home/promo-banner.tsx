@@ -57,16 +57,18 @@ export function PromoBanner() {
               Separamos o que tá com preço bom de verdade, sem aquela história de aumentar antes pra
               dar desconto depois.
             </p>
-            <Link
-              href="/busca?q=promo"
-              className="squish group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-gilly-dark transition-transform hover:scale-[1.03]"
-            >
-              Ver o que está em oferta
-              <ArrowRightIcon
-                size={19}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </Link>
+            <span className="animate-cta-drift mt-8 inline-block">
+              <Link
+                href="/busca?q=promo"
+                className="squish group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-extrabold text-gilly-dark shadow-[0_10px_24px_-10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0_18px_34px_-10px_rgba(0,0,0,0.6)]"
+              >
+                Ver o que está em oferta
+                <ArrowRightIcon
+                  size={19}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
+            </span>
           </div>
         </div>
       </Reveal>

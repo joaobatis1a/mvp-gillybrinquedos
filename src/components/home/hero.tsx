@@ -22,7 +22,7 @@ function CloudLabel({ children, className }: { children: ReactNode; className?: 
       <svg viewBox="0 0 120 72" className="absolute inset-0 h-full w-full text-white" aria-hidden>
         <path d={CLOUD_PATH} fill="currentColor" />
       </svg>
-      <div className="relative pb-2">{children}</div>
+      <div className="relative -translate-y-[6%]">{children}</div>
     </div>
   );
 }
@@ -85,22 +85,26 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/categorias"
-              className="squish group inline-flex items-center gap-2 rounded-full bg-gilly px-7 py-4 font-extrabold text-white shadow-[0_12px_28px_-12px_rgba(242,96,10,0.9)] transition-colors hover:bg-gilly-dark"
-            >
-              Ver a loja inteira
-              <ArrowRightIcon
-                size={19}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </Link>
-            <Link
-              href="/busca?q=promo"
-              className="squish inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-white/80 px-7 py-4 font-extrabold text-ink backdrop-blur transition-all hover:border-gilly hover:bg-white hover:text-gilly-dark"
-            >
-              Quero ver o que tá barato
-            </Link>
+            <span className="animate-cta-drift inline-block">
+              <Link
+                href="/categorias"
+                className="squish group inline-flex items-center gap-2 rounded-full bg-gilly px-7 py-4 font-extrabold text-white shadow-[0_12px_28px_-12px_rgba(242,96,10,0.9)] transition-all duration-300 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0_18px_34px_-12px_rgba(242,96,10,1)]"
+              >
+                Ver a loja inteira
+                <ArrowRightIcon
+                  size={19}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
+            </span>
+            <span className="animate-cta-drift-alt inline-block">
+              <Link
+                href="/busca?q=promo"
+                className="squish inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-white/80 px-7 py-4 font-extrabold text-ink backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:-translate-x-1 hover:border-gilly hover:bg-white hover:text-gilly"
+              >
+                Quero ver o que tá barato
+              </Link>
+            </span>
           </div>
 
           <div className="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold text-ink-soft">
