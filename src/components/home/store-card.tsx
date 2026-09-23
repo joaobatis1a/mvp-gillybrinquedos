@@ -69,9 +69,11 @@ export function StoreCard() {
               <div className="relative mt-8 flex flex-wrap gap-3">
                 <a
                   href="https://wa.me/558198930095"
-                  className="squish group inline-flex items-center gap-3 rounded-full bg-mint py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(63,196,160,0.85)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-12px_rgba(63,196,160,0.95)]"
+                  className="squish group relative inline-flex items-center gap-3 overflow-hidden rounded-full border-2 border-[#25D366]/20 bg-white py-2 pl-2 pr-6 font-extrabold text-[#128C4A] shadow-[0_10px_22px_-14px_rgba(37,211,102,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:shadow-[0_18px_30px_-14px_rgba(37,211,102,0.85)]"
                 >
-                  <WhatsAppBadgeIcon size={30} className="shrink-0" />
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[8deg]">
+                    <WhatsAppBadgeIcon size={32} />
+                  </span>
                   Chamar no WhatsApp
                   <ArrowRightIcon
                     size={17}
@@ -80,13 +82,15 @@ export function StoreCard() {
                 </a>
                 <a
                   href="https://www.instagram.com/gillybrinquedos/"
-                  className="squish inline-flex items-center gap-2.5 rounded-full py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(214,36,159,0.55)] transition-all hover:-translate-y-0.5"
+                  className="squish group inline-flex items-center gap-2.5 rounded-full py-2.5 pl-2.5 pr-6 font-extrabold text-white shadow-[0_14px_26px_-12px_rgba(214,36,159,0.55)] transition-all duration-300 [background-size:180%_180%] hover:-translate-y-0.5 hover:[background-position:80%_20%] hover:shadow-[0_20px_34px_-12px_rgba(214,36,159,0.75)]"
                   style={{
-                    background:
+                    backgroundImage:
                       "radial-gradient(circle at 30% 105%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
+                    backgroundPosition: "20% 80%",
+                    transition: "background-position 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease",
                   }}
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/25">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/25 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                     <InstagramIcon size={17} />
                   </span>
                   @gillybrinquedos
