@@ -11,12 +11,18 @@ type DriftingCloud = {
 };
 
 const CLOUDS: DriftingCloud[] = [
-  { top: "6%", scale: 1.5, opacity: 0.85, duration: 92, delay: -8 },
+  { top: "4%", scale: 1.5, opacity: 0.85, duration: 92, delay: -8 },
+  { top: "12%", scale: 0.7, opacity: 0.4, duration: 118, delay: -30 },
   { top: "18%", scale: 0.9, opacity: 0.6, duration: 128, delay: -54, reverse: true },
+  { top: "26%", scale: 1.3, opacity: 0.42, duration: 104, delay: -66, reverse: true },
   { top: "34%", scale: 2.1, opacity: 0.5, duration: 160, delay: -22 },
+  { top: "44%", scale: 0.85, opacity: 0.35, duration: 96, delay: -44 },
   { top: "52%", scale: 1.1, opacity: 0.45, duration: 112, delay: -76, reverse: true },
+  { top: "60%", scale: 1.6, opacity: 0.3, duration: 150, delay: -12, reverse: true },
   { top: "68%", scale: 1.7, opacity: 0.38, duration: 146, delay: -34 },
+  { top: "76%", scale: 0.6, opacity: 0.5, duration: 88, delay: -20 },
   { top: "84%", scale: 0.8, opacity: 0.55, duration: 100, delay: -62 },
+  { top: "92%", scale: 1.2, opacity: 0.32, duration: 134, delay: -48, reverse: true },
 ];
 
 const SPARKS = [

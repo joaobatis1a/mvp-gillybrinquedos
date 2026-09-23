@@ -35,9 +35,9 @@ export function SearchBar({ className }: { className?: string }) {
   const showPanel = focused && (suggestions.length > 0 || value.trim().length < 2);
 
   return (
-    <div className={`relative ${className ?? ""}`}>
+    <div className={`group relative ${className ?? ""}`}>
       <form onSubmit={handleSubmit} className="relative">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint">
+        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint transition-colors duration-300 group-hover:text-gilly">
           <SearchIcon size={19} />
         </span>
         <input
@@ -48,12 +48,12 @@ export function SearchBar({ className }: { className?: string }) {
           onBlur={() => window.setTimeout(() => setFocused(false), 140)}
           placeholder="O que você está procurando hoje?"
           aria-label="Buscar brinquedos"
-          className="w-full rounded-full border-2 border-border bg-white/90 py-3 pl-12 pr-14 text-sm font-medium text-ink shadow-[0_2px_0_rgba(227,205,178,0.6)] outline-none transition-all duration-300 placeholder:text-ink-faint focus:border-gilly focus:bg-white focus:shadow-[0_0_0_5px_rgba(242,96,10,0.14)]"
+          className="w-full rounded-full border-2 border-border bg-white/90 py-3 pl-12 pr-14 text-sm font-medium text-ink shadow-[0_2px_0_rgba(227,205,178,0.6)] outline-none transition-all duration-300 placeholder:text-ink-faint group-hover:border-gilly/50 group-hover:shadow-[0_4px_14px_-6px_rgba(242,96,10,0.35)] focus:border-gilly focus:bg-white focus:shadow-[0_0_0_5px_rgba(242,96,10,0.14)]"
         />
         <button
           type="submit"
           aria-label="Buscar"
-          className="squish absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-gilly text-white transition-colors hover:bg-gilly-dark"
+          className="squish absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-gilly text-white shadow-sm shadow-gilly/20 transition-all duration-300 hover:translate-x-0.5 hover:scale-110 hover:shadow-[0_10px_20px_-8px_rgba(242,96,10,0.65)]"
         >
           <ArrowRightIcon size={18} />
         </button>

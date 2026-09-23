@@ -67,9 +67,9 @@ export function Header() {
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Abrir menu"
-              className="squish flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-ink transition-colors hover:bg-gilly-tint"
+              className="squish group flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-ink transition-all duration-300 hover:bg-gilly-tint hover:text-gilly"
             >
-              <MenuIcon size={22} />
+              <MenuIcon size={22} className="transition-transform duration-300 group-hover:rotate-90" />
             </button>
 
             <Link href="/" className="shrink-0 font-display text-lg font-extrabold leading-none sm:text-xl">
@@ -82,9 +82,12 @@ export function Header() {
             </Suspense>
 
             <div className="ml-auto flex items-center gap-1">
-              <FavoritesBadge />
+              <div className="flex items-center gap-1">
+                <FavoritesBadge />
+                <CartBadge />
+              </div>
+              <div className="ml-1.5 h-6 w-px bg-border" />
               <AccountMenu />
-              <CartBadge />
             </div>
           </div>
 
