@@ -59,7 +59,7 @@ function Medallion({ benefit }: { benefit: (typeof BENEFITS)[number] }) {
 function BenefitCard({ benefit, index }: { benefit: (typeof BENEFITS)[number]; index: number }) {
   return (
     <div
-      className="animate-carousel-bob relative flex h-full w-56 shrink-0 flex-col items-center gap-1 pt-7"
+      className="animate-carousel-bob relative mr-5 flex h-full w-56 shrink-0 flex-col items-center gap-1 pt-7"
       style={{ animationDelay: `${index * 0.16}s` }}
     >
       {/* mastro do carrossel, ligando o medalhão à barra de cima */}
@@ -87,9 +87,9 @@ export function BenefitsStrip() {
           "linear-gradient(90deg, var(--color-candy-light) 0%, var(--color-sky-light) 34%, var(--color-mint-light) 67%, var(--color-sun-light) 100%)",
       }}
     >
-      <div className="flex w-max gap-5" style={{ animation: "marquee 26s linear infinite" }}>
+      <div className="flex w-max" style={{ animation: "marquee 26s linear infinite" }}>
         {[0, 1].map((copy) => (
-          <div key={copy} className="flex shrink-0 gap-5 pl-5" aria-hidden={copy === 1}>
+          <div key={copy} className="flex shrink-0" aria-hidden={copy === 1}>
             {BENEFITS.map((benefit, index) => (
               <BenefitCard key={`${copy}-${benefit.title}`} benefit={benefit} index={index} />
             ))}
