@@ -28,13 +28,7 @@ export function PromoBanner() {
             }}
           />
           {/* listras diagonais correndo devagar */}
-          <div
-            className="animate-stripes pointer-events-none absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px)",
-            }}
-          />
+          <div className="stripes-diagonal pointer-events-none absolute inset-0 opacity-[0.08]" />
           {SPARKLES.map((sparkle, index) => (
             <span
               key={index}
