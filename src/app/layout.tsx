@@ -23,8 +23,8 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Gilly Brinquedos · Loja de brinquedos em Paulista, PE",
-    template: "%s · Gilly Brinquedos",
+    default: "Nina Brinquedos · Loja de brinquedos em Paulista, PE",
+    template: "%s · Nina Brinquedos",
   },
   description:
     "Brinquedos escolhidos a dedo: LEGO, Hot Wheels, Barbie, pelúcias, jogos e muito mais. Retire na loja em Paulista, PE ou receba em casa.",

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
-import logo from "../../../public/brand/gilly-logo.png";
+
+const CLOUD_PATH =
+  "M18 60 A12 12 0 0 1 8 44 A20 20 0 0 1 34 22 A26 26 0 0 1 82 20 A18 18 0 0 1 110 46 A11 11 0 0 1 104 60 Z";
 
 type LogoProps = {
   size?: "sm" | "md" | "lg";
@@ -23,16 +24,17 @@ export function GillyLogo({ size = "md", href = "/", className, tone = "default"
 
   const content = (
     <span className={`group/logo flex shrink-0 items-center gap-2.5 ${className ?? ""}`}>
-      <Image
-        src={logo}
-        alt=""
-        width={MARK_SIZE[size]}
-        height={MARK_SIZE[size]}
-        priority
-        className="rounded-full shadow-[0_2px_6px_rgba(105,62,20,0.25)] transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-105"
-      />
+      <span
+        className="flex shrink-0 items-center justify-center rounded-full bg-gilly shadow-[0_2px_6px_rgba(105,62,20,0.25)] transition-transform duration-500 ease-out group-hover/logo:-rotate-6 group-hover/logo:scale-105"
+        style={{ width: MARK_SIZE[size], height: MARK_SIZE[size] }}
+        aria-hidden
+      >
+        <svg viewBox="0 0 120 72" className="h-[62%] w-[62%] text-white">
+          <path d={CLOUD_PATH} fill="currentColor" />
+        </svg>
+      </span>
       <span className={`font-display font-extrabold leading-none ${WORD_SIZE[size]}`}>
-        <span className={wordColor}>Gilly</span>
+        <span className={wordColor}>Nina</span>
         <span className={restColor}>brinquedos</span>
       </span>
     </span>
@@ -41,7 +43,7 @@ export function GillyLogo({ size = "md", href = "/", className, tone = "default"
   if (!href) return content;
 
   return (
-    <Link href={href} aria-label="Ir para a página inicial da Gilly Brinquedos">
+    <Link href={href} aria-label="Ir para a página inicial da Nina Brinquedos">
       {content}
     </Link>
   );

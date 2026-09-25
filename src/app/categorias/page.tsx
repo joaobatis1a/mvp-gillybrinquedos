@@ -8,7 +8,7 @@ import { ArrowRightIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Categorias",
-  description: "Todas as categorias da Gilly Brinquedos.",
+  description: "Todas as categorias da Nina Brinquedos.",
 };
 
 export default function CategoriasPage() {

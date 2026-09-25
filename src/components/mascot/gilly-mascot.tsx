@@ -84,7 +84,7 @@ export function GillyMascot({
       height={size}
       className={className}
       role="img"
-      aria-label="Gilly, o mascote da loja"
+      aria-label="Nina, a mascote da loja"
     >
       <defs>
         <radialGradient id="gilly-body" cx="34%" cy="26%" r="82%">

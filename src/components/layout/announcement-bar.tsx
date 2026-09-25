@@ -5,7 +5,7 @@ const ITEMS = [
   { Icon: TruckIcon, text: "Entregamos na Região Metropolitana do Recife" },
   { Icon: CardIcon, text: "Parcelamos em até 10x sem juros" },
   { Icon: PixIcon, text: "No Pix a aprovação sai na hora" },
-  { Icon: WhatsAppIcon, text: "Dúvida? Chama no WhatsApp (81) 9893-0095" },
+  { Icon: WhatsAppIcon, text: "Dúvida? Chama no WhatsApp (81) 4002-8922" },
 ];
 
 export function AnnouncementBar() {

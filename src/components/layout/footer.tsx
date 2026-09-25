@@ -63,15 +63,15 @@ export function Footer() {
           </p>
           <div className="mt-4 flex gap-2.5">
             <a
-              href="https://wa.me/558198930095"
-              aria-label="Chamar a Gilly Brinquedos no WhatsApp"
+              href="https://wa.me/558140028922"
+              aria-label="Chamar a Nina Brinquedos no WhatsApp"
               className="squish"
             >
               <WhatsAppBadgeIcon size={40} />
             </a>
             <a
-              href="https://www.instagram.com/gillybrinquedos/"
-              aria-label="Ver o Instagram da Gilly Brinquedos"
+              href="https://www.instagram.com/ninabrinquedos/"
+              aria-label="Ver o Instagram da Nina Brinquedos"
               className="squish flex h-10 w-10 items-center justify-center rounded-full text-white"
               style={{
                 background:
@@ -132,7 +132,7 @@ export function Footer() {
             <li className="flex gap-2.5">
               <PinIcon size={18} className="mt-0.5 shrink-0 text-white/50" />
               <span>
-                Rodovia PE-15, Km 16,5, nº 242
+                Avenida das Palmeiras, nº 480
                 <br />
                 Centro, Paulista, PE
               </span>
@@ -147,8 +147,8 @@ export function Footer() {
             </li>
             <li className="flex gap-2.5">
               <WhatsAppIcon size={18} className="mt-0.5 shrink-0 text-white/50" />
-              <a href="https://wa.me/558198930095" className="link-draw hover:text-white">
-                (81) 9893-0095
+              <a href="https://wa.me/558140028922" className="link-draw hover:text-white">
+                (81) 4002-8922
               </a>
             </li>
           </ul>
@@ -158,7 +158,7 @@ export function Footer() {
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 sm:flex-row sm:px-6">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Gilly Brinquedos. Feito com carinho em Pernambuco.
+            © {new Date().getFullYear()} Nina Brinquedos. Feito com carinho em Pernambuco.
           </p>
           <div className="flex items-center gap-4 text-xs font-semibold text-white/60">
             <span className="flex items-center gap-1.5">

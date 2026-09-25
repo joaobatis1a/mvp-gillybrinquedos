@@ -42,7 +42,7 @@ export default function LoginPage() {
     <div className="mx-auto flex max-w-md flex-col items-center px-4 py-12 sm:px-6">
       <GillyMascot mood="wave" size={90} />
       <h1 className="mt-2 font-display text-2xl font-extrabold text-ink">Entrar</h1>
-      <p className="mt-1 text-center text-ink-soft">Acesse sua conta Gilly Brinquedos.</p>
+      <p className="mt-1 text-center text-ink-soft">Acesse sua conta Nina Brinquedos.</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 w-full space-y-4">
         <Field label="E-mail" error={errors.email?.message}>

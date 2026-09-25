@@ -19,7 +19,7 @@ export default function CarrinhoPage() {
         <GillyMascot mood="sleepy" size={140} />
         <h1 className="font-display text-2xl font-extrabold text-ink">Seu carrinho está vazio</h1>
         <p className="max-w-sm text-ink-soft">
-          Que tal dar uma olhada nos brinquedos mais amados da Gilly?
+          Que tal dar uma olhada nos brinquedos mais amados da Nina?
         </p>
         <Button onClick={() => router.push("/")}>Continuar comprando</Button>
       </div>

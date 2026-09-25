@@ -73,7 +73,7 @@ export function Header() {
             </button>
 
             <Link href="/" className="shrink-0 font-display text-lg font-extrabold leading-none sm:text-xl">
-              <span className="text-gilly">Gilly</span>
+              <span className="text-gilly">Nina</span>
               <span className="text-ink">brinquedos</span>
             </Link>
 
@@ -151,7 +151,7 @@ export function Header() {
                   </Link>
                 ))}
                 <a
-                  href="https://wa.me/558198930095"
+                  href="https://wa.me/558140028922"
                   className="flex items-center gap-3 px-5 py-3 text-sm font-bold text-ink transition-colors hover:bg-gilly-tint"
                 >
                   <WhatsAppIcon size={19} className="shrink-0 text-gilly" />

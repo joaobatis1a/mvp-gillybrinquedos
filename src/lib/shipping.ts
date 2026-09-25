@@ -9,7 +9,7 @@ export function getShippingOptions(cep: string): ShippingOption[] {
     {
       id: "retirada",
       name: "Retirar na loja",
-      description: "Rodovia PE-15, Km 16,5 · Paulista, PE",
+      description: "Avenida das Palmeiras, 480 · Paulista, PE",
       price: 0,
       etaDays: 0,
     },

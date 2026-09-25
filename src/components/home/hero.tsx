@@ -191,7 +191,7 @@ export function Hero() {
           >
             <CloudLabel className="flex-col">
               <p className="text-center text-[0.6rem] font-extrabold uppercase tracking-widest text-ink-faint">
-                Oi, eu sou a Gilly
+                Oi, eu sou a Nina
               </p>
               <p className="text-center font-display text-sm font-extrabold text-ink">
                 Te ajudo a escolher?
@@ -201,7 +201,7 @@ export function Hero() {
 
           {/* etiqueta flutuante secundária */}
           <a
-            href="https://wa.me/558198930095"
+            href="https://wa.me/558140028922"
             className="animate-float squish absolute right-[-2%] top-[32%] block w-[36%]"
             style={{ animationDelay: "1.6s" }}
           >

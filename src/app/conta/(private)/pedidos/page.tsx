@@ -15,7 +15,7 @@ export default function PedidosPage() {
   return (
     <div>
       <h1 className="font-display text-2xl font-extrabold text-ink">Meus pedidos</h1>
-      <p className="mt-1 text-ink-soft">Acompanhe o histórico das suas compras na Gilly.</p>
+      <p className="mt-1 text-ink-soft">Acompanhe o histórico das suas compras na Nina.</p>
 
       {orders.length === 0 ? (
         <div className="mt-6 flex flex-col items-center gap-3 rounded-3xl border border-dashed border-border py-14 text-center">
