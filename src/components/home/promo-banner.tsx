@@ -28,7 +28,7 @@ export function PromoBanner() {
             }}
           />
           {/* listras diagonais correndo devagar */}
-          <div className="stripes-diagonal pointer-events-none absolute inset-0 opacity-[0.08]" />
+          <div className="stripes-diagonal pointer-events-none opacity-[0.08]" />
           {SPARKLES.map((sparkle, index) => (
             <span
               key={index}

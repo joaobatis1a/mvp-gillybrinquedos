@@ -39,7 +39,7 @@ export function Footer() {
   return (
     <footer className="promo-surface relative mt-16 overflow-hidden text-white/80">
       {/* listras diagonais correndo devagar, no mesmo estilo do banner de ofertas */}
-      <div className="stripes-diagonal pointer-events-none absolute inset-0 opacity-[0.06]" />
+      <div className="stripes-diagonal pointer-events-none opacity-[0.06]" />
       {SPARKLES.map((sparkle, index) => (
         <span
           key={index}

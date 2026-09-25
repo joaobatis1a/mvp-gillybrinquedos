@@ -228,6 +228,14 @@ body {
   50% { transform: translateY(-11px) rotate(1.4deg); }
 }
 
+@keyframes stripe-slide {
+  from { transform: translate3d(0, 0, 0); }
+  /* 46px é o período da listra (18px branco + 28px transparente) ao longo do eixo
+     de 115deg; dividido por sin(115deg) dá o deslocamento horizontal que fecha
+     o loop sem salto visível — outro valor mostraria uma "costura" no ciclo. */
+  to { transform: translate3d(-50.76px, 0, 0); }
+}
+
 /* ---------- animation utilities ---------- */
 
 .animate-float { animation: float-y 5.5s ease-in-out infinite; }
@@ -241,7 +249,19 @@ body {
 .animate-blink { animation: blink 5.5s ease-in-out infinite; transform-origin: center; }
 .animate-sparkle { animation: sparkle-twinkle 2.4s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
-.stripes-diagonal { background-image: repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px); }
+/* desliza via transform (composto na GPU) em vez de animar background-position
+   (que força repintura a cada frame) — com várias outras animações rodando
+   na mesma seção, a disputa por tempo de pintura no thread principal podia
+   derrubar frames e parecer um "corte" no loop. Transform não compete por
+   isso. O elemento precisa "sobrar" além da borda do pai (por isso o inset
+   negativo) para que o deslizamento nunca revele uma quina vazia. */
+.stripes-diagonal {
+  position: absolute;
+  inset: 0 -51px;
+  background-image: repeating-linear-gradient(115deg, #fff 0 18px, transparent 18px 46px);
+  animation: stripe-slide 3s linear infinite;
+  will-change: transform;
+}
 .animate-cta-drift { animation: cta-drift 2.2s ease-in-out infinite; }
 .animate-cta-drift-alt { animation: cta-drift-alt 2.4s ease-in-out infinite; }
 .animate-cta-drift:hover, .animate-cta-drift-alt:hover { animation-play-state: paused; }
