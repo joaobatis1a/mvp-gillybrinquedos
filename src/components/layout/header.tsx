@@ -69,7 +69,7 @@ export function Header() {
               aria-label="Abrir menu"
               className="squish group flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-ink transition-all duration-300 hover:bg-gilly-tint hover:text-gilly"
             >
-              <MenuIcon size={22} className="transition-transform duration-300 group-hover:rotate-90" />
+              <MenuIcon size={22} className="transition-transform duration-300 group-hover:scale-110" />
             </button>
 
             <Link href="/" className="shrink-0 font-display text-lg font-extrabold leading-none sm:text-xl">
